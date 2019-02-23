@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xp:this.resources>
+		<xp:script src="/SSJSCanvasConverter.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	<xp:scriptBlock id="scriptBlock1">
+		<xp:this.value><![CDATA[function signatureCapture() {
+  var canvas = document.getElementById("newSignature");
+  var context = canvas.getContext("2d");
+  canvas.width = 276;
+  canvas.height = 180;
+  context.fillStyle = "#fff";
+  context.strokeStyle = "#444";
+  context.lineWidth = 1.5;
+  context.lineCap = "round";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  var disableSave = true;
+  var pixels = [];
+  var cpixels = [];
+  var xyLast = {};
+  var xyAddLast = {};
+  var calculate = false;
+  {   //functions
+    function remove_event_listeners() {
+      canvas.removeEventListener('mousemove', on_mousemove, false);
+      canvas.removeEventListener('mouseup', on_mouseup, false);
+      canvas.removeEventListener('touchmove', on_mousemove, false);
+      canvas.removeEventListener('touchend', on_mouseup, false);
+
+      document.body.removeEventListener('mouseup', on_mouseup, false);
+      document.body.removeEventListener('touchend', on_mouseup, false);
+    }
+
+    function get_coords(e) {
+      var x, y;
+
+      if (e.changedTouches && e.changedTouches[0]) {
+        var offsety = canvas.offsetTop || 0;
+        var offsetx = canvas.offsetLeft || 0;
+
+        x = e.changedTouches[0].pageX - offsetx;
+        y = e.changedTouches[0].pageY - offsety;
+      } else if (e.layerX || 0 == e.layerX) {
+        x = e.layerX;
+        y = e.layerY;
+      } else if (e.offsetX || 0 == e.offsetX) {
+        x = e.offsetX;
+        y = e.offsetY;
+      }
+
+      return {
+        x : x, y : y
+      };
+    };
+
+    function on_mousedown(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      canvas.addEventListener('mouseup', on_mouseup, false);
+      canvas.addEventListener('mousemove', on_mousemove, false);
+      canvas.addEventListener('touchend', on_mouseup, false);
+      canvas.addEventListener('touchmove', on_mousemove, false);
+      document.body.addEventListener('mouseup', on_mouseup, false);
+      document.body.addEventListener('touchend', on_mouseup, false);
+
+      empty = false;
+      var xy = get_coords(e);
+      context.beginPath();
+      pixels.push('moveStart');
+      context.moveTo(xy.x, xy.y);
+      pixels.push(xy.x, xy.y);
+      xyLast = xy;
+    };
+
+    function on_mousemove(e, finish) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      var xy = get_coords(e);
+      var xyAdd = {
+        x : (xyLast.x + xy.x) / 2,
+        y : (xyLast.y + xy.y) / 2
+      };
+
+      if (calculate) {
+        var xLast = (xyAddLast.x + xyLast.x + xyAdd.x) / 3;
+        var yLast = (xyAddLast.y + xyLast.y + xyAdd.y) / 3;
+        pixels.push(xLast, yLast);
+      } else {
+        calculate = true;
+      }
+
+      context.quadraticCurveTo(xyLast.x, xyLast.y, xyAdd.x, xyAdd.y);
+      pixels.push(xyAdd.x, xyAdd.y);
+      context.stroke();
+      context.beginPath();
+      context.moveTo(xyAdd.x, xyAdd.y);
+      xyAddLast = xyAdd;
+      xyLast = xy;
+
+    };
+
+    function on_mouseup(e) {
+      remove_event_listeners();
+      disableSave = false;
+      context.stroke();
+      pixels.push('e');
+      calculate = false;
+    };
+  }
+  canvas.addEventListener('touchstart', on_mousedown, false);
+  canvas.addEventListener('mousedown', on_mousedown, false);
+}
+
+function signatureSave() {
+  var canvas = document.getElementById("newSignature");// save canvas image as data url (png format by default)
+  var dataURL = canvas.toDataURL("image/png");
+  document.getElementById("saveSignature").src = dataURL;
+  console.log("dataURL is " + dataURL.length); 
+  var canvas = document.getElementById("newSignature");// save canvas image as data url (png format by default)
+  var dataURL = canvas.toDataURL("image/png");
+  if(dataURL.length<1000){
+	  alert('Signature needed');
+	  return false;
+  } else {
+	  console.log("about to convert canvas");
+	  	rpcService.canvasConverter(dataURL).addCallback(function(response){
+		console.log("RPC says it's " + response);
+		if(response =="Done"){
+			//problem
+			console.log(' Done returned');
+			return;
+		} else {
+			console.log("change to: " + response);
+			window.location = response  ;
+			//return;
+		}
+	});
+	}
+};
+
+function signatureClear() {
+  var canvas = document.getElementById("newSignature");
+  var context = canvas.getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
+}]]></xp:this.value>
+	</xp:scriptBlock>
+	<xe:jsonRpcService id="jsonRpcService1" serviceName="rpcService"
+		rendered="true" loaded="true">
+		<xe:this.methods>
+			<xe:remoteMethod name="canvasConverter">
+				<xe:this.arguments>
+
+					<xe:remoteMethodArg name="imageString"
+						type="string">
+					</xe:remoteMethodArg>
+				</xe:this.arguments>
+				<xe:this.script><![CDATA[	var msg = "";
+try{
+	document1.replaceItemValue("sigDateTime", @Now());
+	if(document1.save()){
+	var readyForNext = true;
+	if(document1.getClass().getName().equalsIgnoreCase('lotus.domino.local.Document')){
+		var nDoc:NotesDocument=document1;
+	} else {
+		var nDoc:NotesDocument=document1.getDocument();
+	}
+	var passAge = SSJSgetItemValueAsString(nDoc, "regAge", true);
+		if(passAge.equalsIgnoreCase("Adult")){
+			//need just horse waiver
+		} else {
+			if(isNaN(passAge)){
+				//problem
+			} else {
+				if(parseInt(passAge) < 18){
+					//need minor waiver>. need 3 fields and signature
+					if(SSJSgetItemValueAsString(nDoc, "minorState", true)==""){
+						addFacesMessage("Minor State is Required", "minorState1");
+						msg = msg + "Minor State is Required ";
+						readyForNext=false;
+					}
+					if(SSJSgetItemValueAsString(nDoc, "minorDoB", true)==""){
+						addFacesMessage("Minor DOB is Required", "1");
+						msg = msg + "Minor DOBe is Required ";
+						readyForNext=false;
+					}
+					if(SSJSgetItemValueAsString(nDoc, "minorGuardName", true)==""){
+						addFacesMessage("Guardian Name is Required", "minorGuardName1");
+						msg = msg + "Guardian Name is Required ";
+						readyForNext=false;
+					}
+					//dBar.info("Age is under 18 and readyForNext is: " + readyForNext);
+				} 
+			}
+		}
+		
+		
+		base64ToNotesItemAttachment(imageString, nDoc);
+		nDoc.save();
+		
+
+	var haveSig = false;
+	var AStr='';
+	if(document1.getAttachmentList("sigImage").isEmpty()){
+		//dBar.info("No attachments");
+		AStr = 'No attachments';
+	} else {
+		AStr = document1.getAttachmentList("sigImage").get(0).getName();
+		//dBar.info("Attachment " + AStr);
+		haveSig = true;
+	}
+	
+	var sigOnFile = SSJSgetItemValueAsString(nDoc, "sigOnFileYN", true);
+	
+	if(sigOnFile.equalsIgnoreCase("Yes")){
+		//dBar.info("Sig on file");
+		haveSig = true;
+	} 
+	if(AStr.equalsIgnoreCase("image.png")){
+		//dBar.info("image found");
+		haveSig = true;
+	}
+	if(haveSig){
+		//we have a signature
+		//dBar.info("haveSig is true");
+	} else {
+		readyForNext=false;
+		msg = msg + "Signature or On File Required";
+		addFacesMessage("Signature or On File Required", "minorGuardName1");
+		//dBar.info("need a sig it's false");
+	}
+	 if (readyForNext){
+		//return msg;
+		return "http://"+  facesContext.getExternalContext().getRequest().getHeader("Host") + facesContext.getExternalContext().getRequest().getContextPath() +"/m_CostFinal.xsp?docID="+ nDoc.getNoteID();
+		//return "/m_CostFinal.xsp?docID="+ nDoc.getNoteID();
+	} else {
+		view.postScript("alert('" + msg + "')");
+		return msg;
+		//return "http://"+  facesContext.getExternalContext().getRequest().getHeader("Host") + facesContext.getExternalContext().getRequest().getContextPath() +"/m_Waivers.xsp?docID="+ nDoc.getNoteID();
+	}
+}
+} catch (e) {
+	msg = e;
+	view.postScript("alert('" + msg + "')");
+	//return "http://"+  facesContext.getExternalContext().getRequest().getHeader("Host") + facesContext.getExternalContext().getRequest().getContextPath() +"/m_Waivers.xsp?docID="+ nDoc.getNoteID();
+	return msg;
+}]]></xe:this.script>
+			</xe:remoteMethod>
+		</xe:this.methods>
+	</xe:jsonRpcService>
+	<div id="canvas">
+		<canvas class="roundCorners" id="newSignature"
+			style="position: relative; margin: 0; padding: 0; border: 1px solid #c4caac;">
+		</canvas>
+	</div>
+	<script>signatureCapture();</script>
+	<button type="button" onclick="signatureSave()" class="btn btn-secondary">
+		Save signature v1
+	</button>
+	<button type="button" onclick="signatureClear()" class="btn btn-secondary">
+		Clear signature
+	</button>
+	<xp:br></xp:br>
+	Saved Image
+	<xp:br></xp:br>
+	<img id="saveSignature" alt="Saved image png"></img>
+</xp:view>

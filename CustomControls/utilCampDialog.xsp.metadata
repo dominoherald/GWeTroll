@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.10" replicaid="052582EC0080646A" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="866" sequence="9" unid="12D8CCDF23FF7CDE062583A6006A3A5C">
+<created><datetime>20190219T132017,56-06</datetime></created>
+<modified><datetime>20190221T170631,44-06</datetime></modified>
+<revised><datetime>20190221T170631,43-06</datetime></revised>
+<lastaccessed><datetime>20190221T170631,44-06</datetime></lastaccessed>
+<addedtofile><datetime>20190219T132017,57-06</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Brian Moore/O=WWoW</name></updatedby>
+<wassignedby><name>CN=Brian Moore/O=WWoW</name></wassignedby>
+<item name="$Flags"><text>gC~4;</text></item>
+<item name="$TITLE"><text>utilCampDialog.xsp</text></item>
+
+
+<item name="$FileNames" sign="true"><text>utilCampDialog.xsp</text></item>
+
+
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+
+
+
+</note>

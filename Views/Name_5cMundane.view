@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<view name='Name\Mundane' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.10'
+ replicaid='052582EC0080646A' showinmenu='false' noreplace='true' publicaccess='false'
+ designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
+ headers='beveled' opencollapsed='false' showresponsehierarchy='true' showmargin='true'
+ shrinkrows='false' extendlastcolumn='false' showhierarchies='false' unreadcolor='black'
+ rowlinecount='1' headerlinecount='1' rowspacing='1' bgcolor='white' totalscolor='black'
+ headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='18e' unid='3B9A40E83531F635052582ED000252A9' sequence='5'>
+<created><datetime>20180817T192522,33-05</datetime></created>
+<modified><datetime>20180818T173544,02-05</datetime></modified>
+<revised><datetime>20180817T194027,78-05</datetime></revised>
+<lastaccessed><datetime>20181118T113141,67-06</datetime></lastaccessed>
+<addedtofile><datetime>20180818T173544,02-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Brian Moore/O=WWoW</name></updatedby>
+<wassignedby><name>CN=Brian Moore/O=WWoW</name></wassignedby><code event='selection'><formula
+>SELECT @All</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='mundaneLastName'
+ width='10' resizable='true' separatemultiplevalues='false' sortnoaccent='true'
+ sortnocase='true' showaslinks='false'><columnheader title='Mundane Last Name'><font
+ size='9pt' style='bold'/></columnheader></column>
+<column sort='ascending' hidedetailrows='false' itemname='mundaneFirstName'
+ width='10' resizable='true' separatemultiplevalues='false' sortnoaccent='false'
+ sortnocase='true' showaslinks='false'><columnheader title='Mundane First Name'><font
+ size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='scaName' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='SCA Name'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='residenceKingdom' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='Kingdom'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$4' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@DocNumber</formula></code></column></view>
+

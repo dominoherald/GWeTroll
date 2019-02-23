@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.resources>
+
+		<xp:script src="/SSJSCanvasConverter.jss" clientSide="false">
+		</xp:script>
+		<xp:script src="/ssjsGeneralUtils.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript://.info("Start Cookie set")
+try{
+	//.info("userid: " + sessionScope.userid);
+	setCookie("userid",sessionScope.userid);
+	setCookie("xid",sessionScope.xid)
+}catch(e){
+	//	dBar.error(e.toString());
+	}}]]></xp:this.beforePageLoad>
+
+	
+	<xp:this.data>
+		<xp:dominoDocument var="document2" formName="CampGroup"
+			action="editDocument">
+		</xp:dominoDocument>
+	</xp:this.data>
+	<xp:label
+			id="label6"
+			styleClass="btn btn-info">
+			<xp:this.value><![CDATA[#{javascript:var nDoc:NotesDocument = document1.getDocument();
+
+if(nDoc != null){
+		var scaName = SSJSgetItemValueAsString(nDoc, 'scaName', true);
+		var mdnName = SSJSgetItemValueAsString(nDoc, 'mundaneFirstName', true) + " " + SSJSgetItemValueAsString(nDoc, 'mundaneLastName', true);
+		if(scaName.length < 3){
+			return "Sign for: " + mdnName;
+		} else {
+			return "Sign for: " + scaName + " (" + mdnName + ")";
+		}
+	}
+return "Name not found";}]]></xp:this.value>
+		</xp:label><xp:br></xp:br>
+		<xc:getSignatureDroid canvasWidth="300" canvasHeight="200"
+			showReset="true" resetText="Clear Signature"
+			dataField="signatureData" dataSource="#{javascript:document1}">
+		</xc:getSignatureDroid>
+		<xp:br></xp:br>
+		<xp:link escape="true" text="Edit Document" id="link2" outerStyleClass="lotusBtn">
+			<xp:this.rendered><![CDATA[#{javascript://!currentDocument.isEditable()
+return false;}]]></xp:this.rendered>
+			<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+				<xp:this.action>
+					<xp:changeDocumentMode mode="edit"></xp:changeDocumentMode>
+				</xp:this.action>
+			</xp:eventHandler>
+		</xp:link>
+		<xp:link escape="true" text="Accept Signatures" id="SigSaveButton" outerStyleClass="lotusBtn" styleClass="btn btn-primary">
+			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="signPanel">
+				<xp:this.action>
+					<xp:actionGroup>
+						<xp:saveDocument var="document1"></xp:saveDocument>
+
+						<xp:executeScript>
+							<xp:this.script><![CDATA[#{javascript:var thisStr = view.postScript("sendRPC();");
+//dBar.info("did postScript");}]]></xp:this.script>
+						</xp:executeScript>
+					</xp:actionGroup>
+				</xp:this.action>
+			</xp:eventHandler>
+		</xp:link>
+		<xp:br></xp:br>
+		<xp:panel id="signPanel">
+		<xe:jsonRpcService
+			id="jsonRpcService1"
+			serviceName="rpcService"
+			rendered="true"
+			loaded="true">
+			<xe:this.methods>
+				<xe:remoteMethod name="canvasConverter">
+					<xe:this.arguments>
+						<xe:remoteMethodArg
+							name="imageString"
+							type="string">
+						</xe:remoteMethodArg>
+					</xe:this.arguments>
+					<xe:this.script><![CDATA[base64ToNotesItemAttachment(imageString, document1.getDocument());
+return "done";]]></xe:this.script>
+				</xe:remoteMethod>
+			</xe:this.methods>
+		</xe:jsonRpcService>
+		<xp:scriptBlock
+			id="scriptBlock1"
+			type="text/javascript">
+			<xp:this.value><![CDATA[function sendRPC(){
+	try{
+		//alert('staring script RPC call');
+		var canvas = document.getElementById('#{javascript:getClientId("canvasArea")}'); 
+		var str =  canvas.toDataURL("image/png");
+		rpcService.canvasConverter(str).addCallback(function(response){
+			alert("Signature Save is " + response);
+		});
+	
+	
+	} catch(e){
+		alert(e.toString());
+	}
+	
+	/*
+	rpcService.canvasConverter(str).addCallback(function(response){
+		alert("script RPC says it's " + response);
+	});
+*/
+}]]></xp:this.value>
+		</xp:scriptBlock>
+		</xp:panel>
+<xp:button value="Accept Signature" id="button3" styleClass="btn btn-success" rendered="false">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action>
+
+				<xp:actionGroup>
+					<xp:saveDocument var="document1"></xp:saveDocument>
+					<xp:executeScript>
+						<xp:this.script><![CDATA[#{javascript:var thisStr = view.postScript("sendRPC();");}]]></xp:this.script>
+					</xp:executeScript>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button></xp:view>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="1.10" replicaid="052582EC0080646A" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="196" sequence="1" unid="7EB258C90E874CF5052582ED0009BCB3">
+<created><datetime>20180817T204621,31-05</datetime></created>
+<modified><datetime>20180818T173544,06-05</datetime></modified>
+<revised><datetime>20180817T204621,35-05</datetime></revised>
+<lastaccessed><datetime>20180818T173544,06-05</datetime></lastaccessed>
+<addedtofile><datetime>20180818T173544,06-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Brian Moore/O=WWoW</name><name>CN=GulfWarsAdmin/O=GulfWars</name><name>CN=Brian Moore/O=WWoW</name></updatedby>
+<wassignedby><name>CN=Brian Moore/O=WWoW</name></wassignedby>
+<item name="$TITLE" sign="true"><text>SSJSCanvasConverter</text></item>
+<item name="$Flags"><text>.5834Q</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+</note>

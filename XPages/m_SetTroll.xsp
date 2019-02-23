@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+<div class='container-fluid'>
+		<div class="panel panel-info" id="divTrollName">
+			<div class="panel-heading">Gulf Wars 2019 Troll</div>
+
+			<div class="form-row">
+				<div class="form-group col-md-6">
+				<xp:label value="Enter Name" id="label1"></xp:label>
+				<xp:inputText id="inputText1" styleClass="form-control"
+					value="#{sessionScope.currentTrollName}">
+				</xp:inputText>
+				</div>
+				
+				<div class="form-group col-md-6">
+				<xp:button value="Update Troll Name" id="button1">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+					</xp:eventHandler></xp:button>
+				</div>
+			</div>
+				<div class="form-row">
+				<div class="form-group col-md-6">
+				<xp:label value="Currently Entered Name: "
+					id="label2">
+				</xp:label>
+				<xp:text escape="true" id="computedField1" styleClass="form-control"
+					value="#{sessionScope.currentTrollName}">
+				</xp:text>
+				</div>
+				<div class="form-group col-md-6">
+				</div>
+				</div>
+		</div>
+	</div>
+</xp:view>

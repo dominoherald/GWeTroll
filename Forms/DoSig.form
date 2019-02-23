@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form name='DoSig' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.10'
+ replicaid='052582EC0080646A' publicaccess='false' designerversion='8.5.3'
+ renderpassthrough='true'>
+<noteinfo noteid='2ca' unid='74A76DC41FAB4B2C062583480083864A' sequence='4'>
+<created><datetime>20181117T175635,94-06</datetime></created>
+<modified><datetime>20181117T175908,58-06</datetime></modified>
+<revised><datetime>20181117T175908,57-06</datetime></revised>
+<lastaccessed><datetime>20181117T175908,58-06</datetime></lastaccessed>
+<addedtofile><datetime>20181117T175636,70-06</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Brian Moore/O=WWoW</name></updatedby>
+<wassignedby><name>CN=Brian Moore/O=WWoW</name></wassignedby>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'/>
+<par def='1'/>
+<par def='1'/>
+<par def='1'><field type='richtext' kind='editable' name='sigImage'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAEAAAA=
+</compositedata></par>
+<par def='1'/>
+<par def='1'/>
+<par def='1'><field type='text' kind='computed' name='Untitled'><code event='defaultvalue'><formula
+>@Text(@DocumentUniqueID)</formula></code></field><compositedata type='98'
+ prevtype='65418' nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>DoSig</text></item></form>
+

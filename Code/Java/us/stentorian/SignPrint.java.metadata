@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.10" replicaid="052582EC0080646A" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="896" sequence="63" unid="8AD1F83B33EE89FB062583A900788A22">
+<created><datetime>20190222T155636,82-06</datetime></created>
+<modified><datetime>20190223T150432,20-06</datetime></modified>
+<revised><datetime>20190223T150432,19-06</datetime></revised>
+<lastaccessed><datetime>20190223T150432,20-06</datetime></lastaccessed>
+<addedtofile><datetime>20190222T155636,83-06</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Brian Moore/O=WWoW</name></updatedby>
+<wassignedby><name>CN=Brian Moore/O=WWoW</name></wassignedby>
+<item name="$Flags"><text>34567Cg~[</text></item>
+<item name="$TITLE"><text>us/stentorian/SignPrint.java</text></item>
+
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>us/stentorian/SignPrint.java</text></item>
+
+</note>

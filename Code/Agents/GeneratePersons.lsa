@@ -1,0 +1,426 @@
+<?xml version='1.0' encoding='utf-8'?>
+<agent name='GeneratePersons' xmlns='http://www.lotus.com/dxl' version='9.0'
+ maintenanceversion='1.10' replicaid='052582EC0080646A' hide='v3' publicaccess='false'
+ designerversion='8.5.3'>
+<noteinfo noteid='1ee' unid='6DFF4E7C77B6E812052582EC00833456' sequence='17'>
+<created><datetime>20180817T185306,14-05</datetime></created>
+<modified><datetime>20180818T173544,49-05</datetime></modified>
+<revised><datetime>20180817T193052,36-05</datetime></revised>
+<lastaccessed><datetime>20180818T173544,49-05</datetime></lastaccessed>
+<addedtofile><datetime>20180818T173544,49-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Brian Moore/O=WWoW</name></updatedby>
+<wassignedby><name>CN=Brian Moore/O=WWoW</name></wassignedby>
+<designchange><datetime>20180817T193052,36-05</datetime></designchange>
+<trigger type='actionsmenu'/>
+<documentset type='runonce'/><code event='options'><lotusscript>%REM
+	Agent GenerateRandomPersons
+	Created Apr 4, 2016 by Patrick Kwinten/quintessens
+	Description: Comments for Agent
+%END REM
+Option Public
+Option Declare
+
+</lotusscript></code><code event='declarations'><lotusscript>
+
+
+Dim db As NotesDatabase
+Dim uiview As NotesUIView
+Dim view As NotesView
+Dim doc As NotesDocument
+Dim arr_fname(0 To 60) As String
+Dim arr_lname(0 To 60) As String
+Dim arr_organization(0 To 20) As String
+Dim arr_company(0 To 20) As String
+Dim arr_department(0 To 20) As String
+Dim arr_jobtitle(0 To 20) As String	
+Dim arr_level(0 To 6) As String
+Dim arr_country(0 To 23) As String
+
+Dim arr_birthyear(0 To 10) As String
+
+Dim arr_King(0 To 19) As String
+
+</lotusscript></code><code event='initialize'><lotusscript>Sub Initialize
+	
+	Dim session As New NotesSession	
+	Dim ws As New NotesUIWorkspace
+	
+	Set db = session.CurrentDatabase
+	Set uiview = ws.CurrentView
+	
+	Set view = uiview.View	
+	view.Autoupdate = False
+	
+	'Get your inspiration here: 
+	'http://baby-names.familyeducation.com/browse/letter/a
+	'List of first names
+	arr_fname(0) = "Adam"
+	arr_fname(1) = "Bianca"
+	arr_fname(2) = "Cris"
+	arr_fname(3) = "Diana"
+	arr_fname(4) = "Eric"
+	arr_fname(5) = "Felicia"
+	arr_fname(6) = "Gerard"	
+	arr_fname(7) = "Hannah"
+	arr_fname(8) = "Isaac"
+	arr_fname(9) = "Jessica"
+	arr_fname(10) = "Kane"
+	arr_fname(11) = "Liv"
+	arr_fname(12) = "Mick"
+	arr_fname(13) = "Nancy"
+	arr_fname(14) = "Otto"
+	arr_fname(15) = "Peaches"
+	arr_fname(16) = "Quintijn"
+	arr_fname(17) = "Renate"
+	arr_fname(18) = "Stijn"
+	arr_fname(19) = "Theodor"
+	arr_fname(20) = "Ulla"
+	arr_fname(21) = "Vince"
+	arr_fname(22) = "Wanda"
+	arr_fname(23) = "Xander"
+	arr_fname(24) = "Yvonne"
+	arr_fname(25) = "Zander"
+	arr_fname(26) = "Alice"	
+	arr_fname(27) = "Bernd"	
+	arr_fname(28) = "Carol"		
+	arr_fname(29) = "Dan"
+	arr_fname(30) = "Elsa"	
+	arr_fname(31) = "Frida"	
+	arr_fname(32) = "Gerda"
+	arr_fname(33) = "Hans"
+	arr_fname(34) = "Ida"
+	arr_fname(35) = "Jelle"
+	arr_fname(36) = "Klaas"
+	arr_fname(37) = "Lisa"
+	arr_fname(38) = "Mona"
+	arr_fname(39) = "Nova"
+	arr_fname(40) = "Oman"
+	arr_fname(41) = "Peter"
+	arr_fname(42) = "Qiana"
+	arr_fname(43) = "Renee"
+	arr_fname(44) = "Sam"
+	arr_fname(45) = "Tania"
+	arr_fname(46) = "Udo"
+	arr_fname(47) = "Vera"
+	arr_fname(48) = "Winnie"
+	arr_fname(49) = "Xandra"
+	arr_fname(50) = "Yaala"
+	arr_fname(51) = "Zabrina"
+	arr_fname(52) = "Agatha"
+	arr_fname(53) = "Benny"
+	arr_fname(54) = "Cindy"
+	arr_fname(55) = "Dana"
+	arr_fname(56) = "Ema"
+	arr_fname(57) = "Frits"
+	arr_fname(58) = "Gabriele"
+	arr_fname(59) = "Hyldagard"
+	arr_fname(60) = "Ingrid"
+	
+
+	'List of last names
+	arr_lname(0) = "Abrahams"
+	arr_lname(1) = "Bach"
+	arr_lname(2) = "Christiansen"
+	arr_lname(3) = "DeVries"
+	arr_lname(4) = "Eno"
+	arr_lname(5) = "Ferry"
+	arr_lname(6) = "Gibb"
+	arr_lname(7) = "Henrikson"
+	arr_lname(8) = "Isaac"
+	arr_lname(9) = "Janssen"
+	arr_lname(10) = "Kwinten"	
+	arr_lname(11) = "Last"
+	arr_lname(12) = "Moroder"
+	arr_lname(13) = "Nuland"
+	arr_lname(14) = "Oreiley"
+	arr_lname(15) = "Porsche"
+	arr_lname(16) = "Quinten"
+	arr_lname(17) = "Rhodes"
+	arr_lname(18) = "Sijbrands"
+	arr_lname(19) = "Tielemans"
+	arr_lname(20) = "Uyl"
+	arr_lname(21) = "VanGogh"
+	arr_lname(22) = "Winter"
+	arr_lname(23) = "Xiang"
+	arr_lname(24) = "Yamamoto"
+	arr_lname(25) = "Zabel"
+	arr_lname(26) = "Andersson"
+	arr_lname(27) = "Belles"
+	arr_lname(28) = "Codina"
+	arr_lname(29) = "DiAnno"
+	arr_lname(30) = "Ernest"
+	arr_lname(31) = "Faber"
+	arr_lname(32) = "Gleeson"
+	arr_lname(33) = "Hansson"
+	arr_lname(34) = "Ibrahimovitz"
+	arr_lname(36) = "Joplin"
+	arr_lname(37) = "Kinte"
+	arr_lname(38) = "Long"
+	arr_lname(39) = "Manson"
+	arr_lname(40) = "Newton"
+	arr_lname(41) = "Onasis"
+	arr_lname(42) = "Petterson"
+	arr_lname(43) = "Quaker"
+	arr_lname(44) = "Rune"
+	arr_lname(45) = "Stanson"
+	arr_lname(46) = "Teeven"
+	arr_lname(47) = "Ulvson"
+	arr_lname(48) = "Van den Broek"
+	arr_lname(49) = "Wilsson"
+	arr_lname(50) = "Xenzen"
+	arr_lname(51) = "Zeeland"
+	arr_lname(52) = "Akkerman"
+	arr_lname(53) = "Benoit"
+	arr_lname(54) = "Clemens"
+	arr_lname(55) = "DeVille"
+	arr_lname(56) = "Energo"
+	arr_lname(57) = "Fargo"
+	arr_lname(58) = "Hewton"
+	arr_lname(59) = "Innerson"
+	arr_lname(60) = "Jennesee"
+	
+	'List of organizations
+	arr_organization(0) = "Acme"
+	arr_organization(2) = "Beta"
+	arr_organization(3) = "City"
+	arr_organization(4) = "Delta"
+	arr_organization(5) = "EO"
+	arr_organization(6) = "Final"
+	arr_organization(7) = "Help"
+	arr_organization(8) = "Independent"
+	arr_organization(9) = "Jazz"
+	arr_organization(10) = "King"
+	arr_organization(11) = "Live"
+	arr_organization(12) = "Mega"
+	arr_organization(13) = "Nova"
+	arr_organization(14) = "Omega"
+	arr_organization(15) = "Prius"
+	arr_organization(16) = "Quartz"
+	arr_organization(17) = "Ratio"
+	arr_organization(18) = "Status"
+	arr_organization(19) = "Thy"
+	arr_organization(20) = "Utero"
+	
+	'List of companies
+	arr_company(0) = "Allied Forces"
+	arr_company(1) = "BootCamp"
+	arr_company(2) = "Clear Waters Inc"
+	arr_company(3) = "Data Company"
+	arr_company(4) = "Enterprise Ltd"
+	arr_company(5) = "Firm Corp"
+	arr_company(6) = "Geselschaft AB"
+	arr_company(7) = "Hello World Online"
+	arr_company(8) = "Inc Gmhb"
+	arr_company(9) = "Joenaited AB"
+	arr_company(10) = "Koninklijke Schippers"
+	arr_company(11) = "Liberty Ltd"
+	arr_company(12) = "MegaCorp"
+	arr_company(13) = "New Foundation"
+	arr_company(14) = "Opera House"
+	arr_company(15) = "Public Limited"
+	arr_company(16) = "Queens Hotels"
+	arr_company(17) = "Royal House"
+	arr_company(18) = "System Sounds"
+	arr_company(19) = "The Corp"
+	arr_company(20) = "Univeral Stadium"
+	
+	
+	
+	arr_department(0) = "Administration"
+	arr_department(2) = "BioBank"
+	arr_department(3) = "Cultural and Media Science"
+	arr_department(4) = "Datacenter"
+	arr_department(5) = "Education"
+	arr_department(6) = "Finance"
+	arr_department(7) = "Healthcare"
+	arr_department(8) = "IT"
+	arr_department(9) = "Juniors Support"
+	arr_department(10) = "Knowledge Centre"
+	arr_department(11) = "Legal Affairs"
+	arr_department(12) = "Management"
+	arr_department(13) = "Natural Resources"
+	arr_department(14) = "Office Equipment"
+	arr_department(15) = "Personnel"
+	arr_department(16) = "Relational Management"
+	arr_department(17) = "System Administration"
+	arr_department(18) = "Telephony"
+	arr_department(19) = "Universal services"
+	arr_department(20) = "Vice Management"
+	
+	'List of job titles
+	arr_jobtitle(0) = "Accountant"
+	arr_jobtitle(2) = "Business Developer"
+	arr_jobtitle(3) = "Chef"
+	arr_jobtitle(4) = "Data engineer"
+	arr_jobtitle(5) = "Event planner"
+	arr_jobtitle(6) = "Fundraiser"
+	arr_jobtitle(7) = "Host"
+	arr_jobtitle(8) = "Insurance officer"
+	arr_jobtitle(9) = "Junior Chef"
+	arr_jobtitle(10) = "Kindergarten Teacher"
+	arr_jobtitle(11) = "Headhunter"
+	arr_jobtitle(12) = "Senior Officer"
+	arr_jobtitle(13) = "Senior Assistant"
+	arr_jobtitle(14) = "Head Deployment"
+	arr_jobtitle(15) = "Test engineer"
+	arr_jobtitle(16) = "Transporter"
+	arr_jobtitle(17) = "Constructor"
+	arr_jobtitle(18) = "Contractor"
+	arr_jobtitle(19) = "Surveillance"
+	arr_jobtitle(20) = "Guard"
+	
+	'List of toplevel domains
+	arr_level(0) = "com"
+	arr_level(1) = "tv"
+	arr_level(2) = "net"
+	arr_level(3) = "info"
+	arr_level(4) = "org"
+	arr_level(5) = "gov"
+	arr_level(6) = "edu"
+	
+	'List of countries
+	arr_country(0) = "Argentina"
+	arr_country(1) = "Belgium"
+	arr_country(2) = "Chili"
+	arr_country(3) = "Denmark"
+	arr_country(4) = "Estland"
+	arr_country(5) = "France"
+	arr_country(6) = "Germany"
+	arr_country(7) = "Honduras"
+	arr_country(8) = "Italy"
+	arr_country(9) = "Jamaica"
+	arr_country(10) = "Kenya"
+	arr_country(11) = "Luxemburg"
+	arr_country(12) = "Mozambique"
+	arr_country(13) = "Netherlands"
+	arr_country(14) = "Oman"
+	arr_country(15) = "Portugal"
+	arr_country(16) = "Qatar"
+	arr_country(17) = "Russia"
+	arr_country(18) = "Sweden"
+	arr_country(19) = "Tasmania"
+	arr_country(20) = "United States of America"
+	arr_country(21) = "Venuzuala"
+	arr_country(22) = "Waterworld"
+	arr_country(23) = "Zambia"
+	
+	'List of date of birth
+	arr_birthyear(0) = "1955"
+	arr_birthyear(1) = "1961"
+	arr_birthyear(2) = "1966"
+	arr_birthyear(3) = "1970"
+	arr_birthyear(4) = "1983"
+	arr_birthyear(5) = "1990"
+	arr_birthyear(6) = "1991"
+	arr_birthyear(7) = "1993"
+	arr_birthyear(8) = "1994"
+	arr_birthyear(9) = "1995"
+	arr_birthyear(10) = "1996"
+	
+	arr_King(0)="AEthelmearc"
+	arr_King(1)="An Tir"
+	arr_King(2)="Ansteorra"
+	arr_King(3)="Artemisia"
+	arr_King(4)="Atenveldt"
+	arr_King(5)="Atlantia"
+	arr_King(6)="Avacal"
+	arr_King(7)="Caid"
+	arr_King(8)="Calontir"
+	arr_King(9)="Drachenwald"
+	arr_King(10)="Ealdormere"
+	arr_King(11)="East"
+	arr_King(12)="Gleann Abhann"
+	arr_King(13)="Lochac"
+	arr_King(14)="Meridies"
+	arr_King(15)="Middle"
+	arr_King(16)="Northshield"
+	arr_King(17)="Outlands"
+	arr_King(18)="Trimaris"
+	arr_King(19)="West"
+	
+	Print "asking for number of new persons"	
+	Dim persons As Integer
+	persons% = Cint(Inputbox$("How many persons do you want to create? (5,10 or 25"))
+	
+	Dim vc As NotesViewEntryCollection
+	Set vc = view.AllEntries
+	Print "removing current person entries"
+	'vc.Removeall(True)
+	
+	Dim num As Integer
+	Dim i As Integer
+	
+	Dim firstname As String
+	Dim lastname As String
+	Dim organization As String
+	Dim company As String
+	Dim department As String
+	Dim country As String
+	Dim title As String
+	Dim birth As String
+	
+	Dim bday As Integer
+	Dim bmonth As Integer
+	Dim byear As String
+	
+	Dim fullname As String
+	Dim shortname As String	
+	
+	Print "creating new person entries"
+	For i = 1 To persons
+		
+		firstname = arr_fname( Round(Rnd()* Ubound(arr_fname) ,0) )
+		lastname = arr_lname( Round(Rnd()* Ubound(arr_lname) ,0) )
+		organization = arr_organization( Round(Rnd()* Ubound(arr_organization) ,0) )
+		company = arr_company( Round(Rnd()* Ubound(arr_company) ,0) )
+		department = arr_department( Round(Rnd()* Ubound(arr_department) ,0) )
+		company = arr_King( Round(Rnd()* Ubound(arr_King) ,0) )
+		country = arr_country( Round(Rnd()* Ubound(arr_country) ,0) )
+		title = arr_jobtitle( Round(Rnd()* Ubound(arr_jobtitle) ,0) )
+		
+		bday = Round(Rnd()* 28 ,0)
+		If bday = 0 Then
+			bday = 1
+		End If
+		bmonth = Round(Rnd()* 12 ,0)
+		If bmonth = 0 Then
+			bmonth = 1
+		End If
+		byear = arr_birthyear( Round(Rnd()* Ubound(arr_birthyear) ,0) )	
+		birth = Cstr(bmonth) + "-" + Cstr(bday) + "-" + byear
+		
+		
+		Set doc = db.CreateDocument
+		doc.Form = "Registration"
+		doc.mundaneFirstName = firstname
+		doc.mundaneLastName = lastname
+		doc.SCAName = shortname
+		
+		doc.GroupCamp = country
+		doc.residenceKingdom = company
+		Dim dateTime As NotesDateTime
+		Set dateTime = session.CreateDateTime( birth )
+		Call doc.ReplaceItemValue("DateOfBirth", dateTime)
+		'doc.byear = byear
+		'doc.bmonth = bmonth
+		'doc.bday = bday
+		
+		doc.Department = department
+		doc.OfficeCountry = country
+		'set roaming user for view appearance
+		doc.RoamingUser = "0"
+		Call doc.Save( True, True )
+
+	Next
+	
+	view.Autoupdate = True	
+	
+End Sub</lotusscript></code>
+<rundata processeddocs='0' exitcode='0' agentdata='83A7A183BBC33FD8052582ED0002D497'>
+<agentmodified><datetime>20180817T193052,37-05</datetime></agentmodified>
+<agentrun><datetime>20180817T193057,22-05</datetime></agentrun>
+<runlog>Started running agent 'GeneratePersons' on 08/17/2018 07:30:54 PM
+Ran LotusScript code
+Done running agent 'GeneratePersons' on 08/17/2018 07:30:57 PM
+</runlog></rundata></agent>
+

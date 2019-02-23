@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"><xp:button id="button2" styleClass="btn btn-primary" rendered="false"><xp:this.value><![CDATA[<< Back]]></xp:this.value>
+			<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:context.redirectToPage('m_MobileOP.xsp');}]]></xp:this.action>
+			</xp:eventHandler></xp:button>
+	<ul class="list-group">
+	<li>
+	<xp:link escape="true" text="New Entry" id="link3" styleClass="list-group-item">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:var nDoc:NotesDocument=database.createDocument();
+nDoc.replaceItemValue("Form", "Registration");
+nDoc.save();
+
+context.redirectToPage('AGWReg.xsp?docID='+nDoc.getNoteID());}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:link>
+	</li>
+	<xp:repeat id="repeat1" rows="30" var="rowDataAlpha">
+		<xp:this.value><![CDATA[${javascript:var alphaArray = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+return alphaArray}]]></xp:this.value>
+	
+			<li>
+				<xp:link escape="true" id="link1" styleClass="list-group-item" text="#{javascript:return rowDataAlpha;}">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+						<xp:this.action><![CDATA[#{javascript:sessionScope.put('letter', rowDataAlpha);
+context.redirectToPage('m_Names.xsp');}]]></xp:this.action>
+					</xp:eventHandler></xp:link>
+			</li>
+		
+	</xp:repeat>
+	<li>
+	<xp:link escape="true" text="Search" id="link2" styleClass="list-group-item">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:context.redirectToPage('m_NamesSearch.xsp');}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:link>
+	</li>
+</ul>
+</xp:view>

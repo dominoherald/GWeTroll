@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+<xp:this.data>
+		<xp:dominoDocument var="document1" formName="Registration"
+			action="editDocument"
+			documentId="#{javascript:context.getUrlParameter('docID');}">
+			<xp:this.databaseName><![CDATA[#{javascript:var curServer = @Subset(@DbName(),1);
+if(@Left(curServer.toLowerCase(), "/") == "cn=domino9shared") { 
+	sessionAsSigner.getDatabase('Domino9Shared/WWoW', 'stentorian\\GWeTroll.nsf');
+} else {
+	sessionAsSigner.getDatabase('', 'stentorian\\GWeTroll.nsf');
+}}]]></xp:this.databaseName>
+		</xp:dominoDocument>
+	</xp:this.data>
+	<xp:this.resources>
+		<xp:script src="/ssjsGeneralUtils.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	<div class='container-fluid'>
+		<div class="panel panel-info">
+			<div class="panel-heading">Gulf Wars 2019 Cost</div>
+
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<xp:label id="label2" value="Estimated Cost:" />
+					
+					<xp:text escape="true" id="computedField1"
+						styleClass="form-control" value="#{document1.computedCost}">
+					<xp:this.converter>
+						<xp:convertNumber type="currency"
+							currencyCode="USD">
+						</xp:convertNumber></xp:this.converter></xp:text>
+				</div>
+				<div class="form-group col-md-6">
+					<xp:label id="label33" value="Charged cost:" />
+					<xp:inputText id="inputText18"
+						styleClass="form-control" value="#{document1.AmtDue}">
+						<xp:this.converter>
+							<xp:convertNumber type="number"></xp:convertNumber>
+						</xp:this.converter>
+					</xp:inputText>
+				</div>
+			</div>
+			
+					<div class="form-row">
+				<div class="form-group col-md-6">
+					<div class="form-group col-md-6">
+					<xp:label id="label4" value="Amount Pre-Paid:" />
+					<xp:text escape="true" id="computedField2"
+						value="#{document1.amountPaid}">
+					</xp:text>
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<div class="form-group col-md-6">
+					<xp:label id="label3" value="Reason for Price Charged:" />
+					<xp:inputText id="inputText1" styleClass="form-control"
+						value="#{document1.AmtExplain}">
+					</xp:inputText>
+				</div>
+				</div>
+			</div>
+			
+				<div class="form-row">
+				<div class="form-group col-md-6">
+			<xp:image id="image2">
+
+				<xp:this.value><![CDATA[#{javascript:return facesContext.getExternalContext().getRequest().getHeader("Host") + facesContext.getExternalContext().getRequest().getContextPath() + "/0/" 
++"902D5BD1ED66A17606258349007F1387/$file/image.png";}]]></xp:this.value>
+				<xp:this.url><![CDATA[#{javascript:var imgName ="image.png";
+if(document1.getClass().getName().equalsIgnoreCase('lotus.domino.local.Document')){
+	
+	var nDoc:NotesDocument=document1;
+	} else {
+		var nDoc:NotesDocument=document1.getDocument();
+	}
+var docUNID = nDoc.getUniversalID();
+if (imgName =="") {
+	return "";
+} else {
+return  
+ "/0/"
++ docUNID
++ "/$File/" + imgName;
+}}]]></xp:this.url>
+			</xp:image>
+			<xp:image url="" id="image1"></xp:image>
+				</div>
+				<div class="form-group col-md-6">
+				<xp:label value="Confirm signature" id="label1"></xp:label>
+				</div>
+				</div>
+
+	<div class="form-group col-md-6">
+						<xp:button value="Complete Registration" id="button3">
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript:document1.replaceItemValue("sigDateTime", @Now());
+document1.save();}]]></xp:this.action>
+							</xp:eventHandler></xp:button>
+						<xp:button value="Back" id="button1" styleClass="btn btn-success">
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript:
+if(document1.save()){
+	context.redirectToPage('m_Waivers.xsp?docID='+document1.getNoteID());
+}}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+				
+					<div class="form-group col-md-6">
+					<xp:button value="To Letters" id="button2" styleClass="btn btn-primary"><xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+	<xp:this.action>
+		<xp:openPage name="/m_AlphaList.xsp"></xp:openPage>
+	</xp:this.action></xp:eventHandler></xp:button>
+	</div>
+	</div>
+		</div>
+	</div>
+
+</xp:view>

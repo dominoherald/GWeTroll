@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:debug="http://www.openntf.org/xsp/debugtoolbar" 
+xmlns:xc="http://www.ibm.com/xsp/custom" pageTitle="Event Registration" pageIcon="/CoHLogoTrans.gif"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:this.resources>
+		<xp:script src="/SSJSGeneralUtils.jss" clientSide="false"></xp:script>
+
+		<xp:script src="/commonSSJS.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+
+	
+	<xp:panel id="regPanel">
+		<xp:this.data>
+			<xp:dominoDocument var="document1" formName="Registration" concurrencyMode="force">
+			</xp:dominoDocument>
+
+		</xp:this.data>
+		<xp:messages id="messages1" styleClass="alert alert-danger">
+		</xp:messages>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4">
+					<div class="well">
+						
+						<xp:br></xp:br>
+
+						<div class="form-group">
+							<xp:label id="label11" value="Event:">
+							</xp:label>
+							&#160;
+							<xp:text escape="true" id="computedField1" style="font-weight:bold;font-style:italic">
+								<xp:this.value><![CDATA[#{javascript:return "Gulf Wars 2017";}]]></xp:this.value>
+							</xp:text>
+						</div>
+						<div class="form-group">
+							<xp:label id="label12" value="Event Date:">
+							</xp:label>
+							&#160;
+							<xp:text escape="true" id="computedField2" style="font-weight:bold;font-style:italic">
+								<xp:this.converter>
+									<xp:convertDateTime type="date" dateStyle="long">
+									</xp:convertDateTime>
+								</xp:this.converter>
+								<xp:this.value><![CDATA[#{javascript:return "March, 2017";}]]></xp:this.value>
+							</xp:text>
+						</div>
+						<div class="form-group">
+							<xp:label id="label13" value="Hosting Group:">
+							</xp:label>
+							&#160;
+							<xp:text escape="true" id="computedField3" style="font-weight:bold;font-style:italic">
+								<xp:this.value><![CDATA[#{javascript:return "Kingdom of Gleann Abhann";}]]></xp:this.value>
+							</xp:text>
+						</div>
+						
+						<div class="form-group">
+							<xp:label id="label9" value="Medallion:">							</xp:label>
+							<xp:inputText id="Badge1" styleClass="form-control" value="#{document1.badge}">
+								
+							</xp:inputText>
+						</div>
+						<div class="form-group">
+							<xp:label id="label1" value="Legal First Name:">							</xp:label>
+							<xp:inputText id="inputText1" styleClass="form-control" value="#{document1.mundaneFirstName}">
+
+							</xp:inputText>
+						</div>
+							<div class="form-group">
+							<xp:label id="label33" value="Legal Middle Name:">							</xp:label>
+							<xp:inputText id="inputText18" styleClass="form-control" value="#{document1.mundaneMiddleName}">
+								
+							</xp:inputText>
+							</div>
+						<div class="form-group">
+							<xp:label value="Legal Last Name:" id="label2">
+							</xp:label>
+							<xp:inputText id="inputText2" styleClass="form-control" value="#{document1.mundaneLastName}">
+
+							</xp:inputText>
+						</div>
+						<div class="form-group">
+							<xp:label value="SCA Name:" id="label4">
+							</xp:label>
+							<xp:inputText id="inputText3" styleClass="form-control" value="#{document1.scaName}">
+
+							</xp:inputText>
+						</div>
+						<div class="form-group">
+							<xp:label value="Street:" id="label17"></xp:label>
+							&#160;
+							<xp:inputText id="inputText6" value="#{document1.street}"></xp:inputText>
+						</div>
+						<div class="form-group">
+							<xp:label value="City:" id="label18"></xp:label>
+							&#160;
+							<xp:inputText id="inputText7" value="#{document1.city}"></xp:inputText>
+						</div>
+						<div class="form-group">
+							<xp:label value="Country:" id="label19"></xp:label>
+							&#160;
+							<xp:inputText id="inputText8" value="#{document1.country}"></xp:inputText>
+						</div>
+						<div class="form-group">
+							<xp:label value="State/Providence:" id="label20"></xp:label>
+							&#160;
+							
+							<xp:inputText id="inputText24" value="#{document1.state}"></xp:inputText></div>
+						<div class="form-group">
+							<xp:label value="Postal Code:" id="label21"></xp:label>
+							&#160;
+							<xp:inputText id="inputText9" value="#{document1.postCode}"></xp:inputText>
+						</div>
+						<div class="form-group">
+							<xp:label value="Email:" id="label5"></xp:label>
+							<xp:inputText id="inputText4" styleClass="form-control" value="#{document1.emailAddress}">
+							</xp:inputText>
+						</div>
+						<div class="form-group">
+							<xp:label value="Telephone:" id="label23"></xp:label>
+							<xp:inputText id="inputText11" value="#{document1.telephone}"></xp:inputText>
+							<xp:br></xp:br>
+							<xp:label value="Kingdom of Residence:" id="label34"></xp:label>
+							<xp:comboBox id="comboBox6" value="#{document1.residenceKingdom}" defaultValue="---">
+								<xp:selectItem itemLabel="---"></xp:selectItem>
+									<xp:selectItem itemLabel="Æthelmearc"></xp:selectItem>
+									<xp:selectItem itemLabel="An Tir"></xp:selectItem>
+									<xp:selectItem itemLabel="Ansteorra"></xp:selectItem>
+									<xp:selectItem itemLabel="Artemisia"></xp:selectItem>
+									<xp:selectItem itemLabel="Atenveldt"></xp:selectItem>
+									<xp:selectItem itemLabel="Atlantia"></xp:selectItem>
+									<xp:selectItem itemLabel="Avacal"></xp:selectItem>
+									<xp:selectItem itemLabel="Caid"></xp:selectItem>
+									<xp:selectItem itemLabel="Calontir"></xp:selectItem>
+									<xp:selectItem itemLabel="Drachenwald"></xp:selectItem>
+									<xp:selectItem itemLabel="Ealdormere"></xp:selectItem>
+									<xp:selectItem itemLabel="East"></xp:selectItem>
+									<xp:selectItem itemLabel="Gleann Abhann"></xp:selectItem>
+									<xp:selectItem itemLabel="Lochac"></xp:selectItem>
+									<xp:selectItem itemLabel="Meridies"></xp:selectItem>
+									<xp:selectItem itemLabel="Middle"></xp:selectItem>
+									<xp:selectItem itemLabel="Northshield"></xp:selectItem>
+									<xp:selectItem itemLabel="Outlands"></xp:selectItem>
+									<xp:selectItem itemLabel="Trimaris"></xp:selectItem>
+									<xp:selectItem itemLabel="West "></xp:selectItem>
+								
+							</xp:comboBox>
+							<xp:br></xp:br>
+							<xp:label value="Group Camping with:" id="label35"></xp:label>
+							<xp:inputText id="inputText15" value="#{document1.emerCamp}"></xp:inputText></div>
+						<div class="form-group">
+							<xp:checkBox text="Registrant under 21 years of age" id="checkBox1" checkedValue="Yes" uncheckedValue="No" value="#{document1.over21YN}">	
+							<xp:eventHandler event="onchange" submit="true" refreshMode="partial" refreshId="agePanel"></xp:eventHandler>
+							</xp:checkBox>
+						</div>
+
+						<xp:panel id="agePanel">
+							<div class="form-group">
+								<xp:label value="Age: " id="label22">
+									<xp:this.rendered><![CDATA[#{javascript:if(!!getComponent('checkBox1').getValue()){
+	if(getComponent('checkBox1').getValue().toUpperCase()=="YES"){
+		return true;
+	}
+}
+return false;}]]></xp:this.rendered>
+								</xp:label>
+								<xp:inputText id="inputText10" value="#{document1.regAge}">
+									<xp:this.rendered><![CDATA[#{javascript:if(!!getComponent('checkBox1').getValue()){
+	if(getComponent('checkBox1').getValue().toUpperCase()=="YES"){
+		return true;
+	}
+}
+return false;}]]></xp:this.rendered>
+								</xp:inputText>
+							</div>
+
+						</xp:panel>
+						<div class="form-group">
+							<xp:label value="Membership #:" id="label6">
+							</xp:label>
+							<xp:inputText id="inputText5" styleClass="form-control" value="#{document1.membershipNumber}">
+								<xp:this.validators>
+									<xp:validateLength maximum="6" message="Membership number cannot have more than 6 characters">
+									</xp:validateLength>
+								</xp:this.validators>
+								<xp:eventHandler event="onblur" submit="true" refreshMode="partial" refreshId="computedField4">
+								</xp:eventHandler>
+							</xp:inputText>
+						</div>
+						<div class="form-group">
+							<xp:label value="Expiry Month:" id="label7">
+							</xp:label>
+							<xp:comboBox id="comboBox1" defaultValue="---" value="#{document1.expireMonth}">
+								<xp:selectItem itemLabel="January"></xp:selectItem>
+								<xp:selectItem itemLabel="February"></xp:selectItem>
+								<xp:selectItem itemLabel="March"></xp:selectItem>
+								<xp:selectItem itemLabel="April"></xp:selectItem>
+								<xp:selectItem itemLabel="May"></xp:selectItem>
+								<xp:selectItem itemLabel="June"></xp:selectItem>
+								<xp:selectItem itemLabel="July"></xp:selectItem>
+								<xp:selectItem itemLabel="August"></xp:selectItem>
+								<xp:selectItem itemLabel="September"></xp:selectItem>
+								<xp:selectItem itemLabel="October"></xp:selectItem>
+								<xp:selectItem itemLabel="November"></xp:selectItem>
+								<xp:selectItem itemLabel="December"></xp:selectItem>
+								<xp:selectItem itemLabel="---"></xp:selectItem>
+							</xp:comboBox>
+						</div>
+						<div class="form-group">
+							<xp:label value="Expiry Year:" id="label8">
+							</xp:label>
+							<xp:comboBox id="comboBox2" defaultValue="---" value="#{document1.expireYear}">
+								<xp:selectItem itemLabel="2016"></xp:selectItem>
+								<xp:selectItem itemLabel="2017"></xp:selectItem>
+								<xp:selectItem itemLabel="2018"></xp:selectItem>
+								<xp:selectItem itemLabel="2019"></xp:selectItem>
+								<xp:selectItem itemLabel="2020"></xp:selectItem>
+								
+								<xp:selectItem itemLabel="2021"></xp:selectItem>
+								<xp:selectItem itemLabel="2022"></xp:selectItem>
+								<xp:selectItem itemLabel="2023"></xp:selectItem>
+							<xp:selectItem itemLabel="---"></xp:selectItem></xp:comboBox>
+							<xp:br></xp:br></div>
+								<div class="form-group">
+							<xp:label value="Date of Birth:" id="label10"></xp:label>
+							<xp:inputText id="inputText19" value="#{document1.passAge}"></xp:inputText>
+							</div>
+							<xp:br></xp:br>
+							<xp:br></xp:br>
+
+
+						<xp:panel style="background-color:rgb(226,226,226)">
+							<xp:label value="Emergency Contacts:" id="label24" style="font-weight:bold"></xp:label>
+							<xp:br></xp:br>
+							<xp:br></xp:br>
+							<xp:label value="On-Site" id="label25" style="font-style:italic"></xp:label>
+							<xp:br></xp:br>
+
+							<div class="form-group">
+								<xp:label value="Legal Name:" id="label26"></xp:label>
+
+								<xp:inputText id="inputText12" value="#{document1.emerMundaneName}"></xp:inputText>
+							</div>
+							<div class="form-group">
+								<xp:label value="SCA Name:" id="label27"></xp:label>
+
+								&#160;
+								<xp:inputText id="inputText13" value="#{document1.emerSCAName}"></xp:inputText>
+							</div>
+							<div class="form-group">
+								<xp:label value="Group Camping with:" id="label28"></xp:label>
+								&#160;
+								<xp:inputText id="inputText14" value="#{document1.emerCamp}"></xp:inputText>
+							</div>
+							<div class="form-group">
+								<xp:label value="Kingdom:" id="label29"></xp:label>
+								&#160;
+								
+								<xp:comboBox id="comboBox7" value="#{document1.emerKingdom}" defaultValue="---">
+									<xp:selectItem itemLabel="---"></xp:selectItem>
+									<xp:selectItem itemLabel="Æthelmearc"></xp:selectItem>
+									<xp:selectItem itemLabel="An Tir"></xp:selectItem>
+									<xp:selectItem itemLabel="Ansteorra"></xp:selectItem>
+									<xp:selectItem itemLabel="Artemisia"></xp:selectItem>
+									<xp:selectItem itemLabel="Atenveldt"></xp:selectItem>
+									<xp:selectItem itemLabel="Atlantia"></xp:selectItem>
+									<xp:selectItem itemLabel="Avacal"></xp:selectItem>
+									<xp:selectItem itemLabel="Caid"></xp:selectItem>
+									<xp:selectItem itemLabel="Calontir"></xp:selectItem>
+									<xp:selectItem itemLabel="Drachenwald"></xp:selectItem>
+									<xp:selectItem itemLabel="Ealdormere"></xp:selectItem>
+									<xp:selectItem itemLabel="East"></xp:selectItem>
+									<xp:selectItem itemLabel="Gleann Abhann"></xp:selectItem>
+									<xp:selectItem itemLabel="Lochac"></xp:selectItem>
+									<xp:selectItem itemLabel="Meridies"></xp:selectItem>
+									<xp:selectItem itemLabel="Middle"></xp:selectItem>
+									<xp:selectItem itemLabel="Northshield"></xp:selectItem>
+									<xp:selectItem itemLabel="Outlands"></xp:selectItem>
+									<xp:selectItem itemLabel="Trimaris"></xp:selectItem>
+									<xp:selectItem itemLabel="West "></xp:selectItem>
+									
+								</xp:comboBox>
+								<xp:br></xp:br>
+								</div>
+								<div class="form-group">
+								<xp:label value="Mobile:" id="label40"></xp:label>
+								<xp:inputText id="inputText23" value="#{document1.emerMobile}"></xp:inputText></div>
+							<xp:br></xp:br>
+
+
+							<xp:label value="Off-Site" id="label30" style="font-style:italic"></xp:label>
+
+							<div class="form-group">
+								<xp:label value="Legal Name:" id="label31"></xp:label>
+
+								<xp:inputText id="inputText16" value="#{document1.emerOffName}"></xp:inputText>
+							</div>
+							<div class="form-group">
+								<xp:label value="Telephone:" id="label32"></xp:label>
+								&#160;
+								<xp:inputText id="inputText17" value="#{document1.emerOffPhone}"></xp:inputText>
+								<xp:br></xp:br>
+							</div>
+						</xp:panel>
+							
+							<div class="form-group">
+							<xp:label value="Date of Arrival:" id="label15"></xp:label>
+							<xp:comboBox id="comboBox3" value="#{document1.arrivalDay}" defaultValue="3-12">
+								<xp:selectItem itemLabel="Sunday 3/12/2017" itemValue="3-12"></xp:selectItem>
+								<xp:selectItem itemLabel="Monday 3/13/2017" itemValue="3-13"></xp:selectItem>
+								<xp:selectItem itemLabel="Tuesday 3/14/2017" itemValue="3-14"></xp:selectItem>
+								<xp:selectItem itemLabel="Wednesday 3/15/2017" itemValue="3-15"></xp:selectItem>
+								<xp:selectItem itemLabel="Thursday 3/16/2017" itemValue="3-16"></xp:selectItem>
+								<xp:selectItem itemLabel="Weekend 3/17/2017 and after" itemValue="3-17"></xp:selectItem>
+								
+							</xp:comboBox>
+							</div>
+						<div class="form-group">
+							<xp:label value="Age of Registrant:" id="label16"></xp:label>
+							<xp:comboBox id="comboBox4" defaultValue="Adult" value="#{document1.age}">
+								<xp:selectItem itemLabel="Adult (18+)" itemValue="Adult"></xp:selectItem>
+								<xp:selectItem itemLabel="Minor (13-17)" itemValue="Minor2"></xp:selectItem>
+								<xp:selectItem itemLabel="Minor (6-12)" itemValue="Minor1"></xp:selectItem>
+								<xp:selectItem itemLabel="Minor (under 5 years)" itemValue="Child"></xp:selectItem>
+								<xp:eventHandler event="onchange" submit="true" refreshMode="partial" refreshId="computedField4"></xp:eventHandler></xp:comboBox>
+							<xe:tooltip id="tooltip1" for="comboBox4" label="Age is as of date of arrival"></xe:tooltip>
+							</div>
+						
+						<div class="form-group">
+							<xp:label value="Estimated Cost:" id="label14" rendered="false">
+							</xp:label>
+							&#160;
+							<xp:text escape="true" id="computedField4" rendered="false">
+								<xp:this.value><![CDATA[#{javascript:var arrDate= getComponent('comboBox3').getValue();
+var arrAge= getComponent('comboBox4').getValue();
+var mbrCost=0;
+if(arrDate=='3-12'){
+	if(arrAge=='Adult'){	
+		mbrCost= 70;
+	} else if(arrAge=='Minor2'){
+		mbrCost= 70;
+	} else if(arrAge=='Minor1'){
+		mbrCost= 35;
+	} else if(arrAge=='Child'){
+		mbrCost= 0;
+	} else {
+		mbrCost= 0;
+	}
+	
+} else if(arrDate =='3-13'){
+	if(arrAge=='Adult'){	
+		mbrCost= 65;
+	} else if(arrAge=='Minor2'){
+		mbrCost= 65;
+	} else if(arrAge=='Minor1'){
+		mbrCost= 33;
+	} else if(arrAge=='Child'){
+		mbrCost= 0;
+	} else {
+		mbrCost= 0;
+	}
+} else if(arrDate =='3-14'){
+	if(arrAge=='Adult'){	
+		mbrCost= 62;
+	} else if(arrAge=='Minor2'){
+		mbrCost= 62;
+	} else if(arrAge=='Minor1'){
+		mbrCost= 31;
+	} else if(arrAge=='Child'){
+		mbrCost= 0;
+	} else {
+		mbrCost= 0;
+	}
+} else if(arrDate =='3-15'){
+	if(arrAge=='Adult'){	
+		mbrCost= 59;
+	} else if(arrAge=='Minor2'){
+		mbrCost= 59;
+	} else if(arrAge=='Minor1'){
+		mbrCost= 29;
+	} else if(arrAge=='Child'){
+		mbrCost= 0;
+	} else {
+		mbrCost= 0;
+	}
+} else if(arrDate =='3-16'){
+	if(arrAge=='Adult'){	
+		mbrCost= 56;
+	} else if(arrAge=='Minor2'){
+		mbrCost= 56;
+	} else if(arrAge=='Minor1'){
+		mbrCost= 28;
+	} else if(arrAge=='Child'){
+		mbrCost= 0;
+	} else {
+		mbrCost= 0;
+	}
+} else if(arrDate =='3-17'){
+	if(arrAge=='Adult'){	
+		mbrCost= 45;
+	} else if(arrAge=='Minor2'){
+		mbrCost= 45;
+	} else if(arrAge=='Minor1'){
+		mbrCost= 23;
+	} else if(arrAge=='Child'){
+		mbrCost= 0;
+	} else {
+		mbrCost= 0;
+	}
+} else {
+	mbrCost= 0;
+}
+
+
+if(!!getComponent('inputText5').getValue()){
+	if(getComponent('inputText5').getValue()==''){
+		if(mbrCost == 0){
+			return 0;
+		} else {
+			return mbrCost + 5;
+		}
+	} else {
+		return mbrCost;
+	}
+}
+if(mbrCost == 0){
+	return 0;
+} else {
+	return mbrCost + 5;
+}
+}]]></xp:this.value>
+								<xp:this.converter>
+									<xp:convertNumber type="currency" currencyCode="USD">
+									</xp:convertNumber>
+								</xp:this.converter>
+							</xp:text>
+							&#160;</div>
+						
+							<div class="form-group">
+							<xp:label value="Site Fee:" id="label36"></xp:label>
+							<xp:inputText id="inputText20" value="#{document1.AmtPaid}"><xp:this.converter>
+	<xp:convertNumber type="number"></xp:convertNumber></xp:this.converter></xp:inputText>
+							</div>
+						
+							<div class="form-group">
+							<xp:label value="Non Member Fee:" id="label37"></xp:label>
+							<xp:inputText id="inputText21" value="#{document1.nmf}">
+								<xp:this.converter>
+									<xp:convertNumber type="currency" currencyCode="USD"></xp:convertNumber>
+								</xp:this.converter>
+							</xp:inputText></div>
+							
+							<div class="form-group">
+							<xp:label value="Explaination:" id="label38"></xp:label>
+							<xp:inputText id="inputText22" value="#{document1.nmfExplanation}"></xp:inputText></div>
+							<div class="form-group">
+							<xp:label value="Accomodation:" id="label39"></xp:label>
+							<xp:inputTextarea id="inputTextarea2" value="#{document1.Accomodation}" style="width:287.0px;height:44.0px"></xp:inputTextarea></div>
+								
+						<div class="form-group">
+							<xp:label value="Comments" id="label3">
+							</xp:label>
+							<xp:inputTextarea id="inputTextarea1" value="#{document1.comments}" style="width:287.0px;height:44.0px"></xp:inputTextarea>
+						</div>
+							
+							<xp:br></xp:br>
+
+
+							<xp:messages id="messages2"></xp:messages>
+						<xp:br></xp:br>
+
+						&#160;&#160;
+						<xp:button value="Register" id="button4" styleClass="btn btn-info text-center">
+							
+						<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+							<xp:this.action>
+								<xp:actionGroup>
+
+									<xp:this.condition><![CDATA[#{javascript:document1.replaceItemValue("eventCode", sessionScope.eventDocNoteID);
+document1.save();}]]></xp:this.condition>
+									<xp:openPage name="/xpViewGWEditReg.xsp"></xp:openPage>
+								</xp:actionGroup>
+							</xp:this.action></xp:eventHandler></xp:button>
+						&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+						<xp:button id="button2" value="Cancel" styleClass="btn btn-warning">
+							<xp:eventHandler event="onclick" submit="true" refreshMode="complete" disableValidators="true">
+								<xp:this.action>
+									<xp:actionGroup>
+										<xp:openPage name="/xpViewGWEditReg.xsp"></xp:openPage>
+									</xp:actionGroup>
+								</xp:this.action>
+								<xp:this.script><![CDATA[setTimeout(function() { XSP.allowSubmit() }, 1000);]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:button>
+						&#160;&#160;&#160;&#160;&#160;
+
+						
+						<xp:br></xp:br>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</xp:panel>
+</xp:view>

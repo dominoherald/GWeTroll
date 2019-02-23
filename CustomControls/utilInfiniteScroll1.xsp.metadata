@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.10" replicaid="052582EC0080646A" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1ca" sequence="10" unid="5942C9623661A1C7052582ED00031138">
+<created><datetime>20180817T193330,16-05</datetime></created>
+<modified><datetime>20180818T173544,33-05</datetime></modified>
+<revised><datetime>20180817T200425,15-05</datetime></revised>
+<lastaccessed><datetime>20180818T173544,33-05</datetime></lastaccessed>
+<addedtofile><datetime>20180818T173544,33-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Brian Moore/O=WWoW</name></updatedby>
+<wassignedby><name>CN=Brian Moore/O=WWoW</name></wassignedby>
+<item name="$Flags"><text>gC~4;</text></item>
+
+
+<item name="$FileNames" sign="true"><text>ccInfiniteScroll1.xsp</text></item>
+
+
+<item name="$TITLE" sign="true"><text>utilInfiniteScroll1.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+
+
+
+</note>

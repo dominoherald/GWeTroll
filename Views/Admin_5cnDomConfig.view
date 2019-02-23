@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<view name='Admin\nDomConfig' xmlns='http://www.lotus.com/dxl' version='9.0'
+ maintenanceversion='1.10' replicaid='052582EC0080646A' showinmenu='false'
+ noreplace='true' publicaccess='false' designerversion='8.5.3' unreadmarks='none'
+ onopengoto='lastopened' onrefresh='displayindicator' headers='beveled' opencollapsed='false'
+ showresponsehierarchy='true' showmargin='true' shrinkrows='false' extendlastcolumn='false'
+ showhierarchies='false' unreadcolor='black' rowlinecount='1' headerlinecount='1'
+ rowspacing='1' bgcolor='white' totalscolor='black' headerbgcolor='white'
+ boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='266' unid='0B2C6B93D8C124DA0525830C007FA8C3' sequence='5'>
+<created><datetime>20180918T181422,75-05</datetime></created>
+<modified><datetime>20180918T185636,58-05</datetime></modified>
+<revised><datetime>20180918T185636,57-05</datetime></revised>
+<lastaccessed><datetime>20181118T183042,65-06</datetime></lastaccessed>
+<addedtofile><datetime>20180918T181422,89-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Brian Moore/O=WWoW</name></updatedby>
+<wassignedby><name>CN=Brian Moore/O=WWoW</name></wassignedby><code event='selection'><formula
+>SELECT ((Form = "nDomConfig"))</formula></code>
+<actionbar bgcolor='#f0f0f0' bordercolor='black'>
+<actionbuttonstyle bgcolor='#f0f0f0'/><font color='system'/><border style='solid'
+ width='0px 0px 1px'/>
+<action title='New' icon='30'><code event='click'><formula>@Command([Compose];"nDomConfig")</formula></code></action></actionbar>
+<column sort='ascending' hidedetailrows='false' itemname='$3' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'><columnheader
+ title='Key'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@Trim(Key)</formula></code></column>
+<column hidedetailrows='false' itemname='Value' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='Value'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='Explain' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='Explaination'><font size='9pt' style='bold'/></columnheader></column>
+<item name='$SelQuery' sign='true'>
+<rawitemdata type='f'>
+gQYAAAAAif8WAAAAAAABAAoAbkRvbUNvbmZpZw==
+</rawitemdata></item></view>
+

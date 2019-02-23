@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:this.resources>
+		<xp:script src="/ssjsGeneralUtils.jss" clientSide="false"></xp:script>
+       
+	</xp:this.resources>
+	<xp:button id="button1" styleClass="btn btn-primary"><xp:this.value><![CDATA[<< Back]]></xp:this.value>
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:context.redirectToPage('m_AlphaList.xsp');}]]></xp:this.action>
+			
+		</xp:eventHandler></xp:button>
+	 
+
+	<xp:br></xp:br>
+		<ul class="list-group">
+			<xp:repeat id="nameRepeat1" rows="30" var="rowDataName"
+				repeatControls="false">
+				<xp:this.value><![CDATA[#{javascript:try{
+	var curServer = @Subset(@DbName(),1);
+	if(@Left(curServer.toLowerCase(), "/") == "cn=domino9shared") { 
+		var regDb:NotesDatabase = session.getDatabase('Domino9Shared/WWoW', 'stentorian\\GWeTroll.nsf');
+	} else {
+		var regDb:NotesDatabase = session.getDatabase('','stentorian\\GWeTroll.nsf');
+	}
+	
+	var regView:NotesView=regDb.getView('Reg\\NamesLetter');
+	var regVEC:NotesViewEntryCollection=regView.getAllEntriesByKey(sessionScope.letter, true);
+	return regVEC;
+} catch(e){
+	//return context.redirectToPage('m_MobileOP.xsp');
+}}]]></xp:this.value>
+				<li>
+
+					<xp:text escape="true" id="computedField1"
+						styleClass="list-group-item">
+						<xp:this.value><![CDATA[#{javascript:if(rowDataName.getClass().getName().equalsIgnoreCase('lotus.domino.local.Document')){
+	var nDoc:NotesDocument=rowDataName;
+} else {
+	var nDoc:NotesDocument=rowDataName.getDocument();
+}
+
+return  SSJSgetItemValueAsString(nDoc, 'mundaneLastName', true) + ', ' + SSJSgetItemValueAsString(nDoc, 'mundaneFirstName', true) +
+ ' (' + SSJSgetItemValueAsString(nDoc, 'scaName', false)  + ')';}]]></xp:this.value>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript://var reqMap:Map=facesContext.getExternalContext().getRequestParameterMap();
+//var iterator=reqMap.keySet().iterator();
+//var docStr:String="";
+
+context.redirectToPage('AGWReg.xsp?docID='+rowDataName.getNoteID() );}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:text>
+				</li>
+			</xp:repeat>
+		</ul>
+
+
+	<xp:br></xp:br>
+	<xc:utilInfiniteScroll1 repeatId="nameRepeat1"></xc:utilInfiniteScroll1>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<xe:pagerAddRows id="pagerAddRows1" for="nameRepeat1" partialRefresh="true" refreshId="nameRepeat1" state="true"></xe:pagerAddRows>
+	<xe:pagerSaveState id="pagerSaveState1" for="pagerSaveState1"></xe:pagerSaveState>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<xp:button id="button2" styleClass="btn btn-primary">
+		<xp:this.value><![CDATA[<< Back]]></xp:this.value>
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:context.redirectToPage('m_AlphaList.xsp');}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:br></xp:br>
+	<xp:br></xp:br></xp:view>

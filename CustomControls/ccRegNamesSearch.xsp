@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+
+	<xp:this.resources>
+		<xp:script src="/ssjsGeneralUtils.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	
+	<xp:panel>
+	<div class="container">
+	<xp:button id="button2" styleClass="btn btn-primary"><xp:this.value><![CDATA[<< Back]]></xp:this.value>
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:context.redirectToPage('m_AlphaList.xsp');}]]></xp:this.action>
+		</xp:eventHandler></xp:button>
+	 <div class="form-group">
+	 
+	 <div class="row">
+	 <div class="col-md-6">
+	 	<xp:inputText id="inputText1" value="#{viewScope.vFilter}">
+	 		<xp:this.attrs>
+	 			<xp:attr name="placeholder" value="Search....."></xp:attr>
+	 		</xp:this.attrs></xp:inputText>
+
+	 </div>
+	<div class="col-md-6">
+	<xp:button value="Search" id="button1">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete"></xp:eventHandler>
+	</xp:button>
+	</div>
+	</div>
+	</div>
+	</div>
+	
+	
+		<ul class="list-group">
+			<xp:repeat id="nameRepeat1" rows="30" var="rowDataName">
+				<xp:this.value><![CDATA[#{javascript:var curServer = @Subset(@DbName(),1);
+if(@Left(curServer.toLowerCase(), "/") == "cn=domino9shared") { 
+		var regDb:NotesDatabase = session.getDatabase('Domino9Shared/WWoW', 'stentorian\\GWeTroll.nsf');
+		regDb.updateFTIndex(true);
+	} else {
+		var regDb:NotesDatabase = session.getDatabase('','stentorian\\GWeTroll.nsf');
+		regDb.updateFTIndex(true);
+	}
+
+
+var sKey=getComponent('inputText1').getValue();
+
+if(sKey != null){
+	var wildKey=sKey.indexOf("*");
+	
+	if(wildKey>0){
+		//it has an asterisk, so a wildcard
+	} else{
+		sKey = sKey + "*";
+	}
+}
+var regView:NotesView=regDb.getView('Name\\Mundane');
+
+if(sKey!=null){	
+var query1="[mundaneLastName] CONTAINS " + sKey + " OR " + 
+"[mundaneFirstName] CONTAINS " + sKey  + " OR " + 
+"[scaName] CONTAINS " + sKey  + " OR " +
+"[membershipNumber] CONTAINS " + sKey  + " OR " +
+"[badge] CONTAINS " + sKey
+ ;
+  
+	var nVEC:NotesViewEntryCollection=regDb.FTSearch(query1);
+} else{
+	var nVEC:NotesViewEntryCollection=regView.getAllEntriesByKey("nothing here");
+}
+
+return nVEC;}]]></xp:this.value>
+
+
+				<xp:this.first><![CDATA[#{javascript:/*
+var reqMap:Map=facesContext.getExternalContext().getRequestParameterMap();
+var iterator=reqMap.keySet().iterator();
+var docStr:String="";
+
+while(iterator.hasNext()){
+	var parName = iterator.next();
+	if(parName.equalsIgnoreCase('rowIndex')){
+		docStr=reqMap.get(parName);
+	}
+}
+try{
+return parseInt(docStr);
+} catch(e){
+	return 0;
+}
+*/}]]></xp:this.first>
+				<li>
+					<xp:panel styleClass="list-group-item">
+
+						<xp:text escape="true" id="computedField1"
+							styleClass="list-group-item">
+							<xp:this.value><![CDATA[#{javascript:if(rowDataName.getClass().getName().equalsIgnoreCase('lotus.domino.local.Document')){
+	var nDoc:NotesDocument=rowDataName;
+} else {
+	var nDoc:NotesDocument=rowDataName.getDocument();
+}
+
+return  SSJSgetItemValueAsString(nDoc, 'mundaneLastName', true) + ', ' + SSJSgetItemValueAsString(nDoc, 'mundaneFirstName', true) +
+ ' (' + SSJSgetItemValueAsString(nDoc, 'scaName', false)  + ')';}]]></xp:this.value>
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript://var reqMap:Map=facesContext.getExternalContext().getRequestParameterMap();
+//var iterator=reqMap.keySet().iterator();
+//var docStr:String="";
+
+context.redirectToPage('AGWReg.xsp?docID='+rowDataName.getNoteID() + '&sourcePage=search');}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:text>
+					</xp:panel>
+
+				</li>
+
+			</xp:repeat>
+		</ul>
+	</xp:panel>
+
+
+	<xc:utilInfiniteScroll1 repeatId="nameRepeat1" />
+	</xp:view>

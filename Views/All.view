@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<view name='All' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.10'
+ replicaid='052582EC0080646A' showinmenu='false' noreplace='true' publicaccess='false'
+ designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
+ headers='beveled' opencollapsed='false' showresponsehierarchy='true' showmargin='true'
+ shrinkrows='false' extendlastcolumn='false' showhierarchies='false' unreadcolor='black'
+ rowlinecount='1' headerlinecount='1' rowspacing='1' bgcolor='white' totalscolor='black'
+ headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='17a' unid='3D36CFC3EA512E1C052582ED0002243E' sequence='3'>
+<created><datetime>20180817T192323,50-05</datetime></created>
+<modified><datetime>20180818T173543,91-05</datetime></modified>
+<revised><datetime>20180817T192340,37-05</datetime></revised>
+<lastaccessed><datetime>20190202T161536,68-06</datetime></lastaccessed>
+<addedtofile><datetime>20180818T173543,91-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Brian Moore/O=WWoW</name></updatedby>
+<wassignedby><name>CN=Brian Moore/O=WWoW</name></wassignedby><code event='selection'><formula
+>SELECT @All</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='Form' width='10'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><columnheader title='#'><font size='9pt' style='bold'/></columnheader></column></view>
+

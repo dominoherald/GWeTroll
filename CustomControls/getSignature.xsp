@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.resources>
+		<xp:script src="/SSJSCanvasConverter.jss" clientSide="false"></xp:script>
+		<xp:script src="/commonSSJS.jss" clientSide="false"></xp:script>
+		<xp:script src="/ssjsGeneralUtils.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	<xp:text escape="true" id="canvasArea" tagName="canvas" disableTheme="true">
+		<xp:this.attrs>
+			<xp:attr name="height" value="#{javascript:compositeData.canvasHeight}"></xp:attr>
+			<xp:attr name="width" value="#{javascript:compositeData.canvasWidth}"></xp:attr>
+		</xp:this.attrs>
+		<xp:this.style><![CDATA[#{javascript:var dsn = compositeData.dataSource;
+if (dsn.isEditable()){
+	return "position:relative;border-color:rgb(255,0,0);border-width:thin;border-style:solid"
+} else {
+	return "position:relative;border-color:rgb(0,0,0);border-width:thin;border-style:solid"
+}}]]></xp:this.style>
+	</xp:text> (text area)
+	
+	<xp:br></xp:br>
+	<xp:link escape="true" text="#{javascript:compositeData.resetText}" id="link1" styleClass="btn btn-info">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.script><![CDATA[cb_ctx.clearRect(0,0,#{javascript:compositeData.canvasWidth},#{javascript:compositeData.canvasHeight});
+outputField = document.getElementById("#{id:canvasOutput}");
+outputField.value = "";
+output = [];]]></xp:this.script>
+			<xp:this.action><![CDATA[#{javascript:var nDoc = document1.getDocument();
+document1.replaceItemValue("signatureData", "");
+document1.save();}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:link>
+	&#160;&#160;&#160;&#160;
+	<xp:link escape="true" id="link2" styleClass="btn btn-info" text="Save Signature" rendered="false">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action>
+				<xp:actionGroup>
+					<xp:saveDocument var="testDoc"></xp:saveDocument>
+					<xp:openPage name="/SignView.xsp"></xp:openPage>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:link>
+	&#160; &#160;
+	<xp:link escape="true" id="link3" styleClass="btn btn-info" text="Save Signature No Close" rendered="false">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action>
+				<xp:actionGroup>
+					<xp:saveDocument var="testDoc"></xp:saveDocument>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:link>
+
+	<xp:button value="Click Me" id="button4" rendered="false">
+			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="signPanel">
+				<xp:this.script><![CDATA[//var canvas = document.getElementById("view:_id1:_id2:canvasArea");
+var canvas = document.getElementById('#{javascript:getClientId("canvasArea")}'); 
+var str =  canvas.toDataURL("image/png");
+rpcService.canvasConverter(str).addCallback(function(response){
+	alert("RPC says it's " + response);
+});]]></xp:this.script>
+				<xp:this.action>
+
+					<xp:actionGroup>
+
+						<xp:openPage name="/SignView.xsp"></xp:openPage>
+					</xp:actionGroup>
+				</xp:this.action></xp:eventHandler>
+		</xp:button>&#160;&#160;<xp:button value="Click Me Back v1" id="button1" styleClass="btn btn-warning" rendered="false">
+			<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+				<xp:this.script><![CDATA[//var canvas = document.getElementById("view:_id1:_id2:canvasArea");
+var canvas = document.getElementById('#{javascript:getClientId("canvasArea")}'); 
+var str =  canvas.toDataURL("image/png");
+rpcService.canvasConverter(str).addCallback(function(response){
+	alert("RPC says it's " + response);
+});]]></xp:this.script>
+				<xp:this.action><![CDATA[#{javascript://"http://localhost/stentorian/EventRegistration.nsf/AGWReg.xsp?documentId=B389A36891D7E125062581FF0011F17F&action=editDocument";
+
+if(document1.getClass().getName().equalsIgnoreCase('lotus.domino.local.Document')){
+	var idU = document1.getUniversalID();
+} else {
+	var idU = document1.getDocument().getUniversalID();
+}
+
+//context.redirectToPage("AGWReg.xsp?documentId=" + idU +  "&action=editDocument")
+context.redirectToPage("xpViewEventRegistrantsGW.xsp");}]]></xp:this.action>
+			</xp:eventHandler>
+</xp:button>
+	&#160;&#160;
+	<xp:button value="Just Save" id="btnJustSaveSig" styleClass="btn btn-warning" rendered="false">
+
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.script><![CDATA[//var canvas = document.getElementById("view:_id1:_id2:canvasArea");
+var canvas = document.getElementById('#{javascript:getClientId("canvasArea")}'); 
+var str =  canvas.toDataURL("image/png");
+rpcService.canvasConverter(str).addCallback(function(response){
+	alert("RPC says it's " + response);
+});]]></xp:this.script>
+			<xp:this.action><![CDATA[#{javascript://"http://localhost/stentorian/EventRegistration.nsf/AGWReg.xsp?documentId=B389A36891D7E125062581FF0011F17F&action=editDocument";
+
+if(document1.getClass().getName().equalsIgnoreCase('lotus.domino.local.Document')){
+	var idU = document1.getUniversalID();
+} else {
+	var idU = document1.getDocument().getUniversalID();
+}
+
+//context.redirectToPage("AGWReg.xsp?documentId=" + idU +  "&action=editDocument")}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:panel id="signPanel">
+	<xp:text escape="true" id="computedField1" rendered="false"><xp:this.value><![CDATA[#{javascript:if(compositeData.dataSource.getClass().getName().equalsIgnoreCase('lotus.domino.local.Document')){
+	var nDoc:NotesDocument=compositeData.dataSource;
+} else {
+	var nDoc:NotesDocument=compositeData.dataSource.getDocument();
+}
+return nDoc.getUniversalID();}]]></xp:this.value></xp:text>
+	<xp:br></xp:br>
+	<xp:inputHidden id="canvasOutput">
+		<xp:this.value><![CDATA[#{compositeData.dataSource[compositeData.dataField]}]]></xp:this.value>
+	</xp:inputHidden>
+
+	<xp:scriptBlock id="scriptBlock1">
+		<xp:this.value><![CDATA[// canvasOutputCapture : Author Declan Lynch 2011
+// Based on the work of Richard Garside - www.nogginbox.co.uk [2010]
+// Released under the MIT License
+
+var cb_canvas = null;
+var cb_ctx = null;
+var cb_lastPoints = null;
+var cb_easing = 0.4;
+var output = [];
+
+// Setup event handlers
+window.onload = init;
+
+function init(e) {
+	cb_canvas = document.getElementById("#{id:canvasArea}");
+	cb_lastPoints = Array();
+
+	if (cb_canvas.getContext) {
+		cb_ctx = cb_canvas.getContext('2d');
+		cb_ctx.lineWidth = 2;
+		cb_ctx.strokeStyle = "rgb(0, 0, 0)";
+		cb_ctx.beginPath();
+		
+		// Draw in the existing JSON String
+
+			if ('#{compositeData.dataSource[compositeData.dataField]}' != '' ){
+				output = dojo.fromJson('#{compositeData.dataSource[compositeData.dataField]}');
+				for(var i in output) {
+					if (typeof output[i] === 'object') {
+						cb_ctx.beginPath()
+						cb_ctx.moveTo(output[i].sX, output[i].sY)
+						cb_ctx.lineTo(output[i].eX, output[i].eY)
+						cb_ctx.stroke()
+						cb_ctx.closePath()
+					}
+				}
+			}
+	
+		
+		// Enable drawing mode if the datasource is editable
+		if (#{javascript:compositeData.dataSource.isEditable()}){
+			console.log("datasource is editable");
+			cb_canvas.onmousedown = startDraw;
+			cb_canvas.onmouseup = stopDraw;
+			cb_canvas.ontouchstart = startDraw;
+			cb_canvas.ontouchstop = stopDraw;
+			cb_canvas.ontouchmove = drawMouse;
+		} else {
+			console.log("datasource is not editable");
+		}
+	}
+}
+
+function startDraw(e) {	
+	if (e.touches) {
+		// Touch event
+		for (var i = 1; i <= e.touches.length; i++) {
+			//console.log(e.touches[0].pageX + " >> Get X")
+			//console.log(e.touches[0].pagey + " >> Get Y")
+			cb_lastPoints[i] = getCoords(e.touches[i - 1]); // Get info for finger #1>>original
+			
+		}
+	}
+	else {
+		// Mouse event
+		cb_lastPoints[0] = getCoords(e);
+		cb_canvas.onmousemove = drawMouse;
+	}
+	
+	return false;
+}
+
+// Called whenever cursor position changes after drawing has started
+function stopDraw(e) {
+	e.preventDefault();
+	cb_canvas.onmousemove = null;
+}
+
+function drawMouse(e) {
+	if (e.touches) {
+		// Touch Enabled
+		for (var i = 1; i <= e.touches.length; i++) {
+			//console.log(e.touches[0].pageX + " >> Draw X")
+			//console.log(e.touches[0].pagey + " >> Draw Y")
+			var p = getCoords(e.touches[i - 1]);
+			cb_lastPoints[i] = drawLine(cb_lastPoints[i].x, cb_lastPoints[i].y, p.x, p.y);//this is where the problem is
+		}
+	}
+	else {
+		// Not touch enabled
+		var p = getCoords(e);
+		cb_lastPoints[0] = drawLine(cb_lastPoints[0].x, cb_lastPoints[0].y, p.x, p.y);
+	}
+	cb_ctx.stroke();
+	cb_ctx.closePath();
+	cb_ctx.beginPath();
+
+	return false;
+}
+
+// Draw a line on the canvas from (s)tart to (e)nd
+function drawLine(sX, sY, eX, eY) {
+	cb_ctx.moveTo(sX, sY);
+	cb_ctx.lineTo(eX, eY);
+	
+	output.push({
+      'sX': sX
+      ,'sY': sY
+      ,'eX': eX
+      ,'eY': eY
+    });
+    
+    outputField = document.getElementById("#{id:canvasOutput}");
+    outputField.value = dojo.toJson(output);
+    
+	return { x: eX, y: eY };
+}
+
+// Get the coordinates for a mouse or touch event
+function getCoords(e) {
+	//console.log(Array.isArray(e) + " is e an array? " + e);
+	newInt = parseInt(e);
+	
+	if (e.offsetX) {
+		//console.log("offset");
+		return { x: e.offsetX, y: e.offsetY };
+	}
+	else if (e.layerX) {
+		//console.log("layer")
+		return { x: e.layerX, y: e.layerY };
+	}
+	else {	
+		//console.log(" else " + e.pageX  + " >> " + e.pageY);
+		return { x: e.pageX - cb_canvas.offsetLeft, y: e.pageY - cb_canvas.offsetTop };//<<<original
+		//return { x: e.touches[0].pageX - cb_canvas.offsetLeft, y: e.touches[0].pageY - cb_canvas.offsetTop };
+	}
+}]]></xp:this.value>
+	</xp:scriptBlock>
+	<xe:jsonRpcService id="jsonRpcService1" serviceName="rpcService" rendered="true" loaded="true">
+			<xe:this.methods>
+				<xe:remoteMethod name="canvasConverter">
+					<xe:this.arguments>
+
+						<xe:remoteMethodArg name="imageString" type="string"></xe:remoteMethodArg>
+					</xe:this.arguments>
+					<xe:this.script><![CDATA[var nDoc = testDoc.getDocument();
+base64ToNotesItemAttachment(imageString, nDoc);
+return "done";]]></xe:this.script>
+				</xe:remoteMethod>
+			</xe:this.methods>
+		</xe:jsonRpcService>
+	<xp:image id="image1">
+		<xp:this.url><![CDATA[#{javascript://var imgName = "image.png";
+
+if(document1.getClass().getName().equalsIgnoreCase('lotus.domino.local.Document')){
+	var idU = document1.getUniversalID();
+} else {
+	var idU = document1.getDocument().getUniversalID();
+}
+try{
+	// (imgName =="") {
+	//	return "";
+	//} else {
+		return facesContext.getExternalContext().getRequest().getHeader("Host") + "/stentorian/GWeTroll.nsf/0/" + idU + "/$File/image.png";
+	//}
+} catch(e){
+	//don't show
+}
+
+//facesContext.getExternalContext().getRequest().getHeader("Host") + "/stentorian/" + "registrationdata.nsf" 
+//http://localhost/stentorian/registrationdata.nsf/0/D942B7214240044E062581FF0011F192/$File/image.png
+}]]></xp:this.url>
+		<xp:this.rendered><![CDATA[#{javascript://return false;
+
+var imgName = "image.png";
+
+if(document1.getClass().getName().equalsIgnoreCase('lotus.domino.local.Document')){
+	var idU = document1.getUniversalID();
+} else {
+	var idU = document1.getDocument().getUniversalID();
+}
+try{
+
+	if (document1.hasItem("signatureData")){
+		var nItem = document1.getItemValueString("signatureData");
+		if(nItem.getValueLength()>3){
+			return true;
+		}			
+	}
+} catch(e){
+	return false;
+}
+return false;}]]></xp:this.rendered>
+	</xp:image>
+	 <xp:scriptBlock id="scriptBlock2" type="text/javascript">
+			<xp:this.value><![CDATA[function sendRPC(){
+	try{
+	//alert('staring script RPC call');
+		var canvas = document.getElementById('#{javascript:getClientId("canvasArea")}'); 
+		var str =  canvas.toDataURL("image/png");
+		rpcService.canvasConverter(str).addCallback(function(response){
+			//alert("RPC says it's " + response);
+		});
+	
+	
+	} catch(e){
+		alert(e.toString());
+	}
+	
+	/*
+	rpcService.canvasConverter(str).addCallback(function(response){
+		alert("Signature Saved");
+	});
+*/
+}]]></xp:this.value>
+		</xp:scriptBlock>
+		</xp:panel>
+		</xp:view>

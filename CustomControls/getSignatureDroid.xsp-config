@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>getSignatureDroid</component-type>
+    <composite-name>getSignatureDroid</composite-name>
+    <composite-file>/getSignatureDroid.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;## Signature Capture : Declan Sciolla-Lynch ##&#xd;
+&#xd;
+&lt;/xp:view&gt;</render-markup>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>canvasWidth</property-name>
+      <property-class>int</property-class>
+      <description>How wide the canvas area is in pixels.</description>
+      <property-extension>
+        <designer-extension>
+          <default-value>300</default-value>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <property-name>canvasHeight</property-name>
+      <property-class>int</property-class>
+      <property-extension>
+        <designer-extension>
+          <default-value>200</default-value>
+        </designer-extension>
+      </property-extension>
+      <description>The height of the canvas area in pixels.</description>
+    </property>
+    <property>
+      <property-name>showReset</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <default-value>true</default-value>
+        </designer-extension>
+      </property-extension>
+      <description>Should the 'Clear Signature' link be displayed under the canvas area</description>
+    </property>
+    <property>
+      <property-name>resetText</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <designer-extension>
+          <default-value>Clear Signature</default-value>
+        </designer-extension>
+      </property-extension>
+      <description>Text used for the 'Clear Signature' link</description>
+    </property>
+    <property>
+      <property-name>dataSource</property-name>
+      <property-class>com.ibm.xsp.model.DataSource</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.dataSourcePicker</editor>
+        </designer-extension>
+      </property-extension>
+      <description>The data source to be used to bind the signature input information</description>
+    </property>
+    <property>
+      <property-name>dataField</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor/>
+        </designer-extension>
+      </property-extension>
+      <description>The data source field name to be used to bind to the signature input</description>
+    </property>
+  </composite-component>
+</faces-config>

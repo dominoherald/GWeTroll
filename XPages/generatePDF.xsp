@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+<xp:button value="Bean via Button" id="button4">
+	<xp:eventHandler event="onclick" submit="true"
+		refreshMode="complete">
+		<xp:this.action><![CDATA[#{javascript:callSignPrint.signReport();}]]></xp:this.action>
+	</xp:eventHandler></xp:button>
+</xp:view>

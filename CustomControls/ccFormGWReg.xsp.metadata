@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.10" replicaid="052582EC0080646A" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1f6" sequence="187" unid="CDF78F75239C027A052582EC0081365B">
+<created><datetime>20180817T183120,59-05</datetime></created>
+<modified><datetime>20190222T163424,99-06</datetime></modified>
+<revised><datetime>20190222T163424,98-06</datetime></revised>
+<lastaccessed><datetime>20190222T163424,99-06</datetime></lastaccessed>
+<addedtofile><datetime>20180818T173544,53-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Brian Moore/O=WWoW</name></updatedby>
+<wassignedby><name>CN=Brian Moore/O=WWoW</name></wassignedby>
+<item name="$TITLE"><text>ccFormGWReg.xsp</text></item>
+<item name="$Flags"><text>gC~4;</text></item>
+
+
+
+
+
+
+
+<item name="$FileNames" sign="true"><text>ccFormGWReg.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+
+
+</note>

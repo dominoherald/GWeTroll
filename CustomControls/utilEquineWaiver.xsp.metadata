@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.10" replicaid="052582EC0080646A" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1de" sequence="10" unid="F1B9DF21F12D6BC7052582EC00815822">
+<created><datetime>20180817T183247,06-05</datetime></created>
+<modified><datetime>20190218T122324,59-06</datetime></modified>
+<revised><datetime>20190218T122324,58-06</datetime></revised>
+<lastaccessed><datetime>20190218T122324,59-06</datetime></lastaccessed>
+<addedtofile><datetime>20180818T173544,43-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Brian Moore/O=WWoW</name></updatedby>
+<wassignedby><name>CN=Brian Moore/O=WWoW</name></wassignedby>
+<item name="$TITLE"><text>utilEquineWaiver.xsp</text></item>
+<item name="$Flags"><text>gC~4;</text></item>
+
+
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+
+
+
+
+<item name="$FileNames" sign="true"><text>utilEquineWaiver.xsp</text></item>
+
+</note>

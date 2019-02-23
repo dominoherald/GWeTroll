@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xp_1="http://www.ibm.com/xsp/coreex"
+	xmlns:debug="http://www.openntf.org/xsp/debugtoolbar"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:this.data>
+		<xp:dominoDocument var="document1" formName="Registration"
+			action="editDocument"
+			documentId="#{javascript:context.getUrlParameter('docID');}"
+			concurrencyMode="force" ignoreRequestParams="true">
+			<xp:this.databaseName><![CDATA[#{javascript:var curServer = @Subset(@DbName(),1);
+if(@Left(curServer.toLowerCase(), "/") == "cn=domino9shared") { 
+	sessionAsSigner.getDatabase('Domino9Shared/WWoW', 'stentorian\\GWeTroll.nsf');
+} else {
+	sessionAsSigner.getDatabase('', 'stentorian\\GWeTroll.nsf');
+}}]]></xp:this.databaseName>
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xp:this.resources>
+		<xp:script src="/ssjsGeneralUtils.jss" clientSide="false"></xp:script>
+		<xp:styleSheet href="/BootstrapMods.css"></xp:styleSheet>
+	</xp:this.resources>
+	
+	<xp:panel id="waiverPanel">
+		<div class='container-fluid'>
+			<div class="panel panel-warning">
+				<div class="panel-heading">
+					Waivers
+					<xp:text escape="true" id="computedField1"
+						value="#{document1.scaName}">
+					</xp:text>
+				</div>
+				<div class="panel-body">
+					<div class="form-row">
+						<div class="form-group col-md-12">
+							<xp:tabbedPanel id="waiverTabbedPanel1"
+								selectedTab="EquineTab">
+								<xp:tabPanel
+									label="Equestrian and Non-Member Waiver" id="EquineTab">
+									<xc:utilEquineWaiver></xc:utilEquineWaiver>
+									<xp:br></xp:br>
+									<xp:radioGroup id="radioGroup1"
+										value="#{document1.waiver1}" defaultValue="No" rendered="false">
+										<xp:selectItem
+											itemLabel="Yes">
+										</xp:selectItem>
+										<xp:selectItem itemLabel="No"></xp:selectItem>
+										<xp:eventHandler
+											event="onchange" submit="true" refreshMode="partial"
+											refreshId="waiverTabbedPanel1">
+											<xp:this.action><![CDATA[#{javascript:document1.save();
+redirectToCurrentDocument(false);}]]></xp:this.action>
+										</xp:eventHandler>
+									</xp:radioGroup>
+								</xp:tabPanel>
+								<xp:tabPanel
+									label="Adult Non-Member Waiver" id="AdultNonTab">
+									<xp:this.rendered><![CDATA[#{javascript:return false;
+try{
+	if(document1.getItemValueString("membershipNumber").length > 2){
+			return false;
+		} 
+	return true;
+} catch (e){
+
+	return true;
+}
+
+return true;}]]></xp:this.rendered>
+									<xc:utilAdultNonMemberWaiver></xc:utilAdultNonMemberWaiver>
+									<xp:br></xp:br>
+									<xp:br></xp:br>
+									<xp:radioGroup id="radioGroup2"
+										value="#{document1.waiver2}" defaultValue="No">
+										<xp:selectItem
+											itemLabel="Yes">
+										</xp:selectItem>
+										<xp:selectItem itemLabel="No"></xp:selectItem>
+
+										<xp:eventHandler
+											event="onchange" submit="true" refreshMode="partial"
+											refreshId="waiverTabbedPanel1">
+										</xp:eventHandler>
+									</xp:radioGroup>
+								</xp:tabPanel>
+								<xp:tabPanel label="Minor's Waiver"
+									id="MinorWaiver">
+									<xp:this.rendered><![CDATA[#{javascript:try{
+	if((document1.getItemValueString("regAge")).equalsIgnoreCase("Adult")) {
+		return false;
+	}
+	if(isNaN(document1.getItemValueString("regAge"))){
+		return true;
+	}
+	if(parseInt(document1.getItemValueString("regAge")) < 18){
+		if(document1.getItemValueString("membershipNumber").length > 2){
+			return false;
+		} 
+	} 
+} catch (e){
+	return true;
+}
+return true;}]]></xp:this.rendered>
+									<xc:utilMinorsWaiver></xc:utilMinorsWaiver>
+									<xp:br></xp:br>
+									<xp:br></xp:br>
+									<xp:radioGroup id="radioGroup3"
+										value="#{document1.waiver3}" defaultValue="No">
+										<xp:selectItem
+											itemLabel="Yes">
+										</xp:selectItem>
+										<xp:selectItem itemLabel="No"></xp:selectItem>
+
+										<xp:eventHandler
+											event="onchange" submit="true" refreshMode="partial"
+											refreshId="waiverTabbedPanel1">
+											<xp:this.action><![CDATA[#{javascript:document1.save();
+redirectToCurrentDocument(false);}]]></xp:this.action>
+										</xp:eventHandler>
+									</xp:radioGroup>
+								</xp:tabPanel>
+							</xp:tabbedPanel>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<xp:checkBox text="Signature on File"
+								id="sigOnFileYNCheckBox1" checkedValue="Yes" uncheckedValue="No"
+								value="#{document1.sigOnFileYN}"
+								styleClass="form-check-input">
+							<xp:eventHandler event="onchange"
+								submit="true" refreshMode="partial" refreshId="buttonPanel1">
+								<xp:this.action><![CDATA[#{javascript:if(this.getParent().getValue() == 'Yes'){
+	viewScope.put("moveToCost", this.getParent().getValue());
+} else {
+	viewScope.put("moveToCost", this.getParent().getValue());
+}}]]></xp:this.action>
+							</xp:eventHandler></xp:checkBox>
+						</div>
+						<div class="form-group col-md-6">
+
+							<xp:messages id="messages1"></xp:messages>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body">
+					<div class="form-row">
+						<div class="form-group col-md-12">
+						<xp:panel id="droidSignPanel1">
+								<xp:button value="Get signature" id="button4">
+		<xp:eventHandler event="onclick" submit="false">
+			<xp:this.script><![CDATA[XSP.openDialog("#{id:droidDialog1}");]]></xp:this.script>
+		</xp:eventHandler>
+	</xp:button>
+						</xp:panel>
+						</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<xp:button value="Back" id="button2"
+							styleClass="btn btn-success">
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript:
+if(document1.save()){
+	context.redirectToPage('AGWReg.xsp?docID='+document1.getNoteID());
+}}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+						&#160;
+						<xp:button id="button3" value="Refresh">
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" refreshId="droidSignPanel1">
+							</xp:eventHandler></xp:button></div>
+					<div class="form-group col-md-6">
+					<xp:panel id="buttonPanel1">
+						<xp:button value="To Cost" id="button1"
+							styleClass="btn btn-success">
+							<xp:this.rendered><![CDATA[#{javascript:try{
+	if(viewScope.moveToCost == "Yes"){
+		return true;
+	} else {
+		return false;
+	}
+} catch (e) {
+	return false
+}}]]></xp:this.rendered>
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript:document1.replaceItemValue("sigDateTime", @Now());
+
+if(document1.save()){
+
+	var readyForNext = true;
+	
+	if(document1.getClass().getName().equalsIgnoreCase('lotus.domino.local.Document')){
+		var nDoc:NotesDocument=document1;
+	} else {
+		var nDoc:NotesDocument=document1.getDocument();
+	}
+	var passAge = SSJSgetItemValueAsString(nDoc, "regAge", true);
+	
+		if(passAge.equalsIgnoreCase("Adult")){
+			//need just horse waiver
+		} else {
+			if(isNaN(passAge)){
+				//problem
+			} else {
+				if(parseInt(passAge) < 18){
+					//need minor waiver>. need 3 fields and signature
+					if(SSJSgetItemValueAsString(nDoc, "minorState", true)==""){
+						addFacesMessage("Minor State is Required", "minorState1");
+						readyForNext=false;
+					}
+					if(SSJSgetItemValueAsString(nDoc, "minorDoB", true)==""){
+						addFacesMessage("Minor DOB is Required", "1");
+						readyForNext=false;
+					}
+					if(SSJSgetItemValueAsString(nDoc, "minorGuardName", true)==""){
+						addFacesMessage("Guardian Name is Required", "minorGuardName1");
+						readyForNext=false;
+					}
+					//dBar.info("Age is under 18 and readyForNext is: " + readyForNext);
+				} 
+			}
+		}
+
+	var haveSig = false;
+	var AStr='';
+	if(document1.getAttachmentList("sigImage").isEmpty()){
+		//dBar.info("No attachments");
+		AStr = 'No attachments';
+	} else {
+		AStr = document1.getAttachmentList("sigImage").get(0).getName();
+		//dBar.info("Attachment " + AStr);
+		haveSig = true;
+	}
+	
+	var sigOnFile = SSJSgetItemValueAsString(nDoc, "sigOnFileYN", true);
+	
+	if(sigOnFile.equalsIgnoreCase("Yes")){
+		//dBar.info("Sig on file");
+		haveSig = true;
+	} 
+	if(AStr.equalsIgnoreCase("image.png")){
+		//dBar.info("image found");
+		haveSig = true;
+	}
+	
+	if(haveSig){
+		//we have a signature
+		//dBar.info("haveSig is true");
+	} else {
+		readyForNext=false;
+		addFacesMessage("Signature or On File Required", "minorGuardName1");
+		//dBar.info("need a sig it's false");
+	}
+
+
+	//dBar.info("readyForNext is " + readyForNext);
+
+	if(readyForNext){
+		//only go forward if we have attachment or on file & accepted. 
+		context.redirectToPage('m_CostFinal.xsp?docID='+document1.getNoteID());
+	}
+	return;
+}}]]></xp:this.action>
+
+							</xp:eventHandler>
+						</xp:button>
+					</xp:panel>
+					</div>
+				</div>
+			</div>
+		</div>
+	</xp:panel>
+	<xp:br></xp:br>
+	
+	
+	<xe:dialog id="droidDialog1" title="Collect Signature">
+		<xc:ccAndroidSign></xc:ccAndroidSign>
+	</xe:dialog>
+</xp:view>

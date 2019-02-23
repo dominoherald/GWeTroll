@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<view name='Registration\GWparentNoteID' xmlns='http://www.lotus.com/dxl'
+ version='9.0' maintenanceversion='1.10' replicaid='052582EC0080646A' hide='web'
+ showinmenu='false' publicaccess='false' designerversion='8.5.3' unreadmarks='none'
+ onopengoto='lastopened' onrefresh='displayindicator' headers='beveled' opencollapsed='false'
+ showresponsehierarchy='true' showmargin='true' shrinkrows='false' extendlastcolumn='false'
+ showhierarchies='false' unreadcolor='black' rowlinecount='1' headerlinecount='1'
+ rowspacing='1' bgcolor='white' totalscolor='black' headerbgcolor='white'
+ boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='1a2' unid='1BEA789436C7E257052582EC008096B1' sequence='1'>
+<created><datetime>20180817T182431,85-05</datetime></created>
+<modified><datetime>20180818T173544,13-05</datetime></modified>
+<revised><datetime>20180817T182431,86-05</datetime></revised>
+<lastaccessed><datetime>20181118T113133,28-06</datetime></lastaccessed>
+<addedtofile><datetime>20180818T173544,13-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Brian Moore/O=WWoW</name><name>CN=GulfWarsAdmin/O=GulfWars</name><name
+>CN=Brian Moore/O=WWoW</name></updatedby>
+<wassignedby><name>CN=GulfWarsAdmin/O=GulfWars</name></wassignedby><code event='selection'><formula
+>SELECT ((Form = "Registration")) &amp; (@Contains(eventCode; "1CDA"))</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='parentNoteID' width='10'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><columnheader title='parentNoteID'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$1' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='NoteID'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@NoteID</formula></code></column>
+<column hidedetailrows='false' itemname='mundaneLastName' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$2' width='25.6250' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@Created</formula></code></column>
+<column hidedetailrows='false' itemname='mundaneFirstName' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='scaName' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+><font size='9pt' style='bold'/></columnheader></column>
+<item name='$SelQuery' sign='true'>
+<rawitemdata type='f'>
+gQYAAAAAif8YAAAAAAABAAwAUmVnaXN0cmF0aW9ugv8zACAAAAADAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAQU5EAIP/PQAAAAAAAAUHAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAACQAEAGV2ZW50Q29kZTFDREEA
+</rawitemdata></item></view>
+
